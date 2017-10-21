@@ -28,12 +28,12 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
         initComponents();
         userProcessContainer = upc;
         supplier = s;
-        txtName.setText(s.getSupplyName());
+        //txtName.setText(s.getSupplyName());
         refreshTable();
     }
 
     public void refreshTable() {
-        int rowCount = productCatalog.getRowCount();
+        /*int rowCount = productCatalog.getRowCount();
         DefaultTableModel model = (DefaultTableModel) productCatalog.getModel();
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
@@ -45,7 +45,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
             row[1] = p.getModelNumber();
             row[2] = p.getPrice();
             model.addRow(row);
-        }
+        }*/
     }
 
     /**
@@ -212,7 +212,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
             return;
         }
         Product s = (Product) productCatalog.getValueAt(row, 0);
-        supplier.getProductCatalog().removeProduct(s);
+//        supplier.getProductCatalog().removeProduct(s);
         refreshTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
 

@@ -147,14 +147,14 @@ public class CreateNewProduct extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-        Product p = supplier.getProductCatalog().addProduct();
+/*        Product p = supplier.getProductCatalog().addProduct();
         p.setProdName(txtName.getText());
         String stringPrice = txtPrice.getText();
         if(stringPrice.isEmpty()==false){
             int price = Integer.parseInt(stringPrice);
             p.setPrice(price);
         }
-        JOptionPane.showMessageDialog(null, "Product added!", "Info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Product added!", "Info", JOptionPane.INFORMATION_MESSAGE);*/
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

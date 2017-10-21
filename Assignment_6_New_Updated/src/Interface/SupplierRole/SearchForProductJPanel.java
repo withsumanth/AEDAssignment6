@@ -123,7 +123,7 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        try {
+       /* try {
             Product p;
             int productId = Integer.parseInt(txtId.getText());
             p = supplier.getProductCatalog().searchProduct(productId);
@@ -138,7 +138,7 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Nothing found", "No result found matching your criteria!!", JOptionPane.WARNING_MESSAGE);
-        }
+        }*/
     }//GEN-LAST:event_btnSearchActionPerformed
 
 

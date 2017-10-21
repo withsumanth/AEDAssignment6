@@ -78,8 +78,8 @@ public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageSuppliersActionPerformed
         // TODO add your handling code here:
-        ManageSuppliers ms = new ManageSuppliers(userProcessContainer, supplierDirectory);
-        userProcessContainer.add("ManageSuppliers", ms);
+        //ManageSuppliers ms = new ManageSuppliers(userProcessContainer, supplierDirectory);
+        //userProcessContainer.add("ManageSuppliers", ms);
         CardLayout layout =(CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageSuppliersActionPerformed

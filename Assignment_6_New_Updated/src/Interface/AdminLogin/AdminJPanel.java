@@ -45,7 +45,7 @@ public class AdminJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -57,6 +57,12 @@ public class AdminJPanel extends javax.swing.JPanel {
         jLabel1.setText("User Name:");
 
         jLabel2.setText("Password:");
+
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -70,9 +76,9 @@ public class AdminJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                            .addComponent(txtPassword)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(316, 316, 316)
                         .addComponent(btnLogin)))
@@ -85,14 +91,11 @@ public class AdminJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(33, 33, 33)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addComponent(btnLogin)
                 .addContainerGap(306, Short.MAX_VALUE))
         );
@@ -105,10 +108,10 @@ public class AdminJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please enter userName and Password");
             return;
         }
-        
-        AdminLogin admin = business.getAdminLoginDirectory().isValidUser(userName, password);
-        SalesPerson salesPerson = business.getSalespersonDir().isValidUser(userName, password);
-        Supplier supplier = business.getSupplierDir().isValidUser(userName, password);
+        String passwordEncrypted = business.getPassEncryption().encrypt(password);
+        AdminLogin admin = business.getAdminLoginDirectory().isValidUser(userName, passwordEncrypted);
+        SalesPerson salesPerson = business.getSalespersonDir().isValidUser(userName, passwordEncrypted);
+        Supplier supplier = business.getSupplierDir().isValidUser(userName, passwordEncrypted);
         
         if(admin!=null){
             AdminWorkAreaJPanel panel = new AdminWorkAreaJPanel(userProcessContainer,business,admin);
@@ -129,12 +132,16 @@ public class AdminJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }
