@@ -12,9 +12,9 @@ package Business;
 public class Product {
 
     private String prodName;
-    private int price;
+    public int price;
     private int modelNumber;
-
+    public String test;
     private static int count = 0;
 
     @Override
