@@ -11,41 +11,40 @@ package Business;
  */
 public class SalesPerson {
     
-    private String SalesPersonName;
-    public int SalespersonId;
-    public String SalesPersonaddress;
-    public String SalesPersonemail;
+    private String salesPersonName;
+    private String salesUserName;
+    private String salesPassword;
+    private String salesAccountStatus;
+
+    public String getSalesAccountStatus() {
+        return salesAccountStatus;
+    }
+
+    public void setSalesAccountStatus(String salesAccountStatus) {
+        this.salesAccountStatus = salesAccountStatus;
+    }
 
     public String getSalesPersonName() {
-        return SalesPersonName;
+        return salesPersonName;
     }
 
-    public void setSalesPersonName(String SalesPersonName) {
-        this.SalesPersonName = SalesPersonName;
+    public void setSalesPersonName(String salesPersonName) {
+        this.salesPersonName = salesPersonName;
     }
 
-    public int getSalespersonId() {
-        return SalespersonId;
+    public String getSalesUserName() {
+        return salesUserName;
     }
 
-    public void setSalespersonId(int SalespersonId) {
-        this.SalespersonId = SalespersonId;
+    public void setSalesUserName(String salesUserName) {
+        this.salesUserName = salesUserName;
     }
 
-    public String getSalesPersonaddress() {
-        return SalesPersonaddress;
+    public String getSalesPassword() {
+        return salesPassword;
     }
 
-    public void setSalesPersonaddress(String SalesPersonaddress) {
-        this.SalesPersonaddress = SalesPersonaddress;
+    public void setSalesPassword(String salesPassword) {
+        this.salesPassword = salesPassword;
     }
-
-    public String getSalesPersonemail() {
-        return SalesPersonemail;
-    }
-
-    public void setSalesPersonemail(String SalesPersonemail) {
-        this.SalesPersonemail = SalesPersonemail;
-    }
-    
 }

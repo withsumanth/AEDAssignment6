@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UserInterface.SupplierRole;
+package Interface.SupplierRole;
 
+import Business.Business;
 import Business.Supplier;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -18,12 +19,15 @@ public class SupplierWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form SupplierWorkAreaJPanel
      */
-   private JPanel userProcessContainer;
+    private JPanel userProcessContainer;
     private Supplier supplier;
-    public SupplierWorkAreaJPanel(JPanel upc, Supplier s) {
+    private Business business;
+
+    public SupplierWorkAreaJPanel(JPanel userProcessContainer, Business business, Supplier supplier) {
         initComponents();
-        userProcessContainer = upc;
-        supplier = s;
+        this.business = business;
+        this.supplier = supplier;
+        this.userProcessContainer = userProcessContainer;
     }
 
     /**

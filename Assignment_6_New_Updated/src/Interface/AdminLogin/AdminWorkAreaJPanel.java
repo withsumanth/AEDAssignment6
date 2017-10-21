@@ -3,19 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UserInterface.AdminJPanel;
+package Interface.AdminLogin;
+
+import Business.AdminLogin;
+import Business.Business;
+import javax.swing.JPanel;
 
 /**
  *
- * @author JAI JINENDRA
+ * @author Sumanth
  */
-public class ViewSalesPerson extends javax.swing.JPanel {
+public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ViewSalesPerson
+     * Creates new form AdminWorkAreaJPanel
      */
-    public ViewSalesPerson() {
+    private JPanel userProcessContainer;
+    Business business;
+    AdminLogin admin;
+    
+    AdminWorkAreaJPanel(JPanel userProcessContainer, Business business, AdminLogin admin) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.business=business;
+        this.admin = admin;
     }
 
     /**
@@ -31,11 +42,11 @@ public class ViewSalesPerson extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UserInterface.AdminJPanel;
+package Interface.SalesPerson;
 
-import Business.SupplierDirectory;
+import Business.AdminLogin;
+import Business.Business;
+import Business.SalesPerson;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -13,20 +15,22 @@ import javax.swing.JPanel;
  *
  * @author JAI JINENDRA
  */
-public class AdminWorkAreaJPanel extends javax.swing.JPanel {
+public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form AdminWorkAreaJPanel
+     * Creates new form SalesPersonWorkAreaJPanel
      */
    
     
     private JPanel userProcessContainer;
-    private SupplierDirectory supplierDirectory;
-    public AdminWorkAreaJPanel(JPanel userProcessContainer,SupplierDirectory supplierDirectory) {
-        
+    Business business;
+    SalesPerson salesPerson;
+    
+    public SalesPersonWorkAreaJPanel(JPanel userProcessContainer, Business business, SalesPerson salesPerson) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
-        this.supplierDirectory=supplierDirectory;
+        this.business=business;
+        this.salesPerson = salesPerson;
     }
 
     /**

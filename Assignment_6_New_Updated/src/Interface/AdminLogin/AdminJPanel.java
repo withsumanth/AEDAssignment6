@@ -3,25 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface.LoginPanel;
+package Interface.AdminLogin;
 
+import Business.AdminLogin;
+import Business.Business;
+import Business.SalesPerson;
+import Business.Supplier;
+import Interface.SalesPerson.SalesPersonWorkAreaJPanel;
+import Interface.SupplierRole.SupplierWorkAreaJPanel;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  *
  * @author JAI JINENDRA
  */
-public class LoginJPanel extends javax.swing.JPanel {
+public class AdminJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form LoginJPanel
      */
-    public LoginJPanel() {
+    JPanel userProcessContainer;
+    Business business;
+    public AdminJPanel(JPanel userProcessContainer, Business business) {
         initComponents();
-    }
-
-    public LoginJPanel(JPanel MainJPanel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
     }
 
     /**
@@ -91,9 +99,34 @@ public class LoginJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        String userName = txtUserName.getText();
+        String password = txtPassword.getText();
+        if(userName.trim().length()==0 || password.trim().length()==0){
+            JOptionPane.showMessageDialog(null, "Please enter userName and Password");
+            return;
+        }
         
+        AdminLogin admin = business.getAdminLoginDirectory().isValidUser(userName, password);
+        SalesPerson salesPerson = business.getSalespersonDir().isValidUser(userName, password);
+        Supplier supplier = business.getSupplierDir().isValidUser(userName, password);
         
+        if(admin!=null){
+            AdminWorkAreaJPanel panel = new AdminWorkAreaJPanel(userProcessContainer,business,admin);
+            userProcessContainer.add("AdminWorkAreaJPanel", panel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        }else if(salesPerson!=null){
+            SalesPersonWorkAreaJPanel panel = new SalesPersonWorkAreaJPanel(userProcessContainer,business,salesPerson);
+            userProcessContainer.add("SupplierWorkAreaJPanel", panel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        }else if(supplier!=null){
+            SupplierWorkAreaJPanel panel = new SupplierWorkAreaJPanel(userProcessContainer,business,supplier);
+            userProcessContainer.add("SupplierWorkAreaJPanel", panel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        }else{
+            JOptionPane.showMessageDialog(null, "UserName/Password entered is invalid");
+            return;
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
 

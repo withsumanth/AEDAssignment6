@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UserInterface.AdminJPanel;
+package Interface.SalesPerson;
 
 /**
  *
  * @author JAI JINENDRA
  */
-public class AddSalesPerson extends javax.swing.JPanel {
+public class ViewSalesPerson extends javax.swing.JPanel {
 
     /**
-     * Creates new form AddSalesPerson
+     * Creates new form ViewSalesPerson
      */
-    public AddSalesPerson() {
+    public ViewSalesPerson() {
         initComponents();
     }
 
@@ -31,11 +31,11 @@ public class AddSalesPerson extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 404, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

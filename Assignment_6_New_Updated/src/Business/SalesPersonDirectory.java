@@ -13,9 +13,26 @@ import java.util.ArrayList;
  */
 public class SalesPersonDirectory {
 
-    private ArrayList<SalesPerson> salespersonlist;
+    private ArrayList<SalesPerson> salespersonDir;
 
     public SalesPersonDirectory() {
-        salespersonlist = new ArrayList<SalesPerson>();
+        salespersonDir = new ArrayList<SalesPerson>();
+    }
+
+    public ArrayList<SalesPerson> getSalespersonDir() {
+        return salespersonDir;
+    }
+
+    public void setSalespersonDir(ArrayList<SalesPerson> salespersonDir) {
+        this.salespersonDir = salespersonDir;
+    }
+    
+    public SalesPerson isValidUser(String userName, String password){
+        for(SalesPerson s:salespersonDir){
+            if(s.getSalesUserName().equals(userName) && s.getSalesPassword().toString().equals(password.toString()) && s.getSalesAccountStatus().equals("Active")){
+                return s;
+            }
+        }
+        return null;
     }
 }

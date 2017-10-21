@@ -15,29 +15,32 @@ import java.util.List;
  */
 public class ProductCatalog {
     
-    private List<Product> productCatalog;
+    private List<Product> productCatalogDir;
 
     public ProductCatalog() {
-    productCatalog = new ArrayList<Product>();
+    productCatalogDir = new ArrayList<Product>();
     }
-    
-    public List<Product> getProductcatalog(){
-        return productCatalog;
+
+    public List<Product> getProductCatalogDir() {
+        return productCatalogDir;
     }
-    
+
+    public void setProductCatalogDir(List<Product> productCatalogDir) {
+        this.productCatalogDir = productCatalogDir;
+    }
     
     public Product addProduct(){
         Product p = new Product();
-        productCatalog.add(p);
+        productCatalogDir.add(p);
         return p;
     }
     
     public void removeProduct(Product p){
-        productCatalog.remove(p);
+        productCatalogDir.remove(p);
     }
     
     public Product searchProduct(int id){
-        for (Product product : productCatalog) {
+        for (Product product : productCatalogDir) {
             if(product.getModelNumber()==id){
                 return product;
             }
