@@ -7,6 +7,7 @@ package Interface.AdminLogin;
 
 import Business.AdminLogin;
 import Business.Business;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -27,6 +28,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         this.userProcessContainer=userProcessContainer;
         this.business=business;
         this.admin = admin;
+        userNameTxtField.setText(admin.getAdminUserName());
     }
 
     /**
@@ -38,19 +40,49 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        mngSalesBtn = new javax.swing.JButton();
+        mngSupplierJBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        userNameTxtField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        mngSalesBtn.setText("Manage Sales Person >>");
+        add(mngSalesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 188, 233, 32));
+
+        mngSupplierJBtn.setText("Manage Suppliers >>");
+        mngSupplierJBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mngSupplierJBtnActionPerformed(evt);
+            }
+        });
+        add(mngSupplierJBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 129, 231, 32));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("        Admin Work Area");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 180, 50));
+
+        userNameTxtField.setEnabled(false);
+        add(userNameTxtField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 90, 30));
+
+        jLabel2.setText("UserName");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 60, 30));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mngSupplierJBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mngSupplierJBtnActionPerformed
+        ManageSupplierJPanel panel = new ManageSupplierJPanel(userProcessContainer,business,admin);
+        userProcessContainer.add("ManageSupplierJPanel", panel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_mngSupplierJBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton mngSalesBtn;
+    private javax.swing.JButton mngSupplierJBtn;
+    private javax.swing.JTextField userNameTxtField;
     // End of variables declaration//GEN-END:variables
 }
