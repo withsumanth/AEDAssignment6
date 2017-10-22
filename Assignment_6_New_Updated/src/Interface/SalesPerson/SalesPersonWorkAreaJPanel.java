@@ -42,51 +42,45 @@ public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnManageSuppliers = new javax.swing.JButton();
+        btnManageSupplierandSalesPerson = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
-        btnManageSuppliers.setText("Manage Suppliers, SalesPerson >>");
-        btnManageSuppliers.addActionListener(new java.awt.event.ActionListener() {
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnManageSupplierandSalesPerson.setText("Manage Suppliers and Sales Person >>");
+        btnManageSupplierandSalesPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageSuppliersActionPerformed(evt);
+                btnManageSupplierandSalesPersonActionPerformed(evt);
             }
         });
+        add(btnManageSupplierandSalesPerson, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
 
-        jLabel1.setText("Manage Suppliers, SalesPerson Work Area Panel");
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel1.setText("Sales Person WorkArea");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 230, 45));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(251, 251, 251)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnManageSuppliers))
-                .addContainerGap(297, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                .addComponent(btnManageSuppliers)
-                .addGap(192, 192, 192))
-        );
+        jLabel2.setText("SalesPerson:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+
+        jLabel3.setText("SalesPerson User id:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnManageSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageSuppliersActionPerformed
+    private void btnManageSupplierandSalesPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageSupplierandSalesPersonActionPerformed
         // TODO add your handling code here:
         //ManageSuppliers ms = new ManageSuppliers(userProcessContainer, supplierDirectory);
         //userProcessContainer.add("ManageSuppliers", ms);
         CardLayout layout =(CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnManageSuppliersActionPerformed
+    }//GEN-LAST:event_btnManageSupplierandSalesPersonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnManageSuppliers;
+    private javax.swing.JButton btnManageSupplierandSalesPerson;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

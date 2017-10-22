@@ -14,6 +14,15 @@ public class Product {
     private String prodName;
     public int price;
     private int modelNumber;
+    private int avail;
+
+    public int getAvail() {
+        return avail;
+    }
+
+    public void setAvail(int avail) {
+        this.avail = avail;
+    }
     public String test;
     private static int count = 0;
 

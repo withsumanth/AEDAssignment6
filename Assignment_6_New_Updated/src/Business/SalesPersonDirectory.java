@@ -26,10 +26,10 @@ public class SalesPersonDirectory {
     public void setSalespersonDir(ArrayList<SalesPerson> salespersonDir) {
         this.salespersonDir = salespersonDir;
     }
-    
-    public SalesPerson isValidUser(String userName, String password){
-        for(SalesPerson s:salespersonDir){
-            if(s.getSalesUserName().equals(userName) && s.getSalesPassword().toString().equals(password.toString()) && s.getSalesAccountStatus().equals("Active")){
+
+    public SalesPerson isValidUser(String userName, String password) {
+        for (SalesPerson s : salespersonDir) {
+            if (s.getSalesUserName().equals(userName) && s.getSalesPassword().toString().equals(password.toString()) && s.getSalesAccountStatus().equals("Active")) {
                 return s;
             }
         }

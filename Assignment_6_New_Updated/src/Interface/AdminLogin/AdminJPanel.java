@@ -26,6 +26,7 @@ public class AdminJPanel extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     Business business;
+
     public AdminJPanel(JPanel userProcessContainer, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -104,7 +105,7 @@ public class AdminJPanel extends javax.swing.JPanel {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
-        if(userName.trim().length()==0 || password.trim().length()==0){
+        if (userName.trim().length() == 0 || password.trim().length() == 0) {
             JOptionPane.showMessageDialog(null, "Please enter userName and Password");
             return;
         }
@@ -112,21 +113,23 @@ public class AdminJPanel extends javax.swing.JPanel {
         AdminLogin admin = business.getAdminLoginDirectory().isValidUser(userName, passwordEncrypted);
         SalesPerson salesPerson = business.getSalespersonDir().isValidUser(userName, passwordEncrypted);
         Supplier supplier = business.getSupplierDir().isValidUser(userName, passwordEncrypted);
-        
-        if(admin!=null){
-            AdminWorkAreaJPanel panel = new AdminWorkAreaJPanel(userProcessContainer,business,admin);
+
+        if (admin != null) {
+
+            AdminWorkAreaJPanel panel = new AdminWorkAreaJPanel(userProcessContainer, business, admin);
+            //SupplierWorkAreaJPanel panel = new SupplierWorkAreaJPanel(userProcessContainer, business, supplier);
             userProcessContainer.add("AdminWorkAreaJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
-        }else if(salesPerson!=null){
-            SalesPersonWorkAreaJPanel panel = new SalesPersonWorkAreaJPanel(userProcessContainer,business,salesPerson);
+        } else if (salesPerson != null) {
+            SalesPersonWorkAreaJPanel panel = new SalesPersonWorkAreaJPanel(userProcessContainer, business, salesPerson);
             userProcessContainer.add("SupplierWorkAreaJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        }else if(supplier!=null){
-            SupplierWorkAreaJPanel panel = new SupplierWorkAreaJPanel(userProcessContainer,business,supplier);
+        } else if (supplier != null) {
+            SupplierWorkAreaJPanel panel = new SupplierWorkAreaJPanel(userProcessContainer, business, supplier);
             userProcessContainer.add("SupplierWorkAreaJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "UserName/Password entered is invalid");
             return;
         }

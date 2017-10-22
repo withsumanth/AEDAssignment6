@@ -79,7 +79,7 @@ public class SupplierWorkAreaJPanel extends javax.swing.JPanel {
 
     private void managePButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managePButtonActionPerformed
 
-        ManageProductCatalogJPanel mpcjp = new ManageProductCatalogJPanel(userProcessContainer, supplier);
+        ManageProductCatalogJPanel mpcjp = new ManageProductCatalogJPanel(userProcessContainer, business);
         userProcessContainer.add("ManageProductCatalogJPanel", mpcjp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

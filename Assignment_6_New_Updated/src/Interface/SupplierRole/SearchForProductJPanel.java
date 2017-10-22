@@ -5,6 +5,7 @@
  */
 package Interface.SupplierRole;
 
+import Business.Business;
 import Business.Product;
 import Business.Supplier;
 import java.awt.CardLayout;
@@ -22,12 +23,12 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
      * Creates new form SearchForProductJPanel
      */
     JPanel userProcessContainer;
-    Supplier supplier;
+    Business business;
 
-    public SearchForProductJPanel(JPanel upc, Supplier s) {
+    public SearchForProductJPanel(JPanel upc, Business b) {
         initComponents();
         userProcessContainer = upc;
-        supplier = s;
+        business= b;
     }
 
     /**
@@ -123,10 +124,10 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-       /* try {
+        try {
             Product p;
             int productId = Integer.parseInt(txtId.getText());
-            p = supplier.getProductCatalog().searchProduct(productId);
+            p = business.getProductCatalog().searchProduct(productId);
             if (p != null) {
                 SearchResultJPanel vpdjp = new SearchResultJPanel(userProcessContainer, p);
                 userProcessContainer.add("SearchResultJPanel", vpdjp);
@@ -138,7 +139,7 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Nothing found", "No result found matching your criteria!!", JOptionPane.WARNING_MESSAGE);
-        }*/
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
 
 

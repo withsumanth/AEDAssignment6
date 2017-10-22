@@ -5,6 +5,7 @@
  */
 package Interface.SupplierRole;
 
+import Business.Business;
 import Business.Product;
 import Business.Supplier;
 import java.awt.CardLayout;
@@ -22,30 +23,31 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
      * Creates new form ManageProductCatalogJPanel
      */
     private JPanel userProcessContainer;
-    private Supplier supplier;
+    private Business business;
 
-    public ManageProductCatalogJPanel(JPanel upc, Supplier s) {
+    public ManageProductCatalogJPanel(JPanel upc, Business b) {
         initComponents();
         userProcessContainer = upc;
-        supplier = s;
+        business = b;
         //txtName.setText(s.getSupplyName());
         refreshTable();
     }
 
     public void refreshTable() {
-        /*int rowCount = productCatalog.getRowCount();
+        int rowCount = productCatalog.getRowCount();
         DefaultTableModel model = (DefaultTableModel) productCatalog.getModel();
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
 
-        for (Product p : supplier.getProductCatalog().getProductcatalog()) {
-            Object row[] = new Object[3];
+        for (Product p : business.getProductCatalog().getProductCatalogDir()) {
+            Object row[] = new Object[4];
             row[0] = p;
             row[1] = p.getModelNumber();
             row[2] = p.getPrice();
+            row[3]=p.getAvail();
             model.addRow(row);
-        }*/
+        }
     }
 
     /**
@@ -90,16 +92,27 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
         productCatalog.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         productCatalog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Product Name", "Product ID", "Price"
+                "Product Name", "Product ID", "Price", "Availability"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(productCatalog);
+        if (productCatalog.getColumnModel().getColumnCount() > 0) {
+            productCatalog.getColumnModel().getColumn(0).setResizable(false);
+            productCatalog.getColumnModel().getColumn(1).setResizable(false);
+            productCatalog.getColumnModel().getColumn(2).setResizable(false);
+            productCatalog.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         btnDelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnDelete.setText("Delete Product(s)");
@@ -197,7 +210,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        SearchForProductJPanel sfpjp = new SearchForProductJPanel(userProcessContainer, supplier);
+        SearchForProductJPanel sfpjp = new SearchForProductJPanel(userProcessContainer, business);
         userProcessContainer.add("SearchForProductJPanel", sfpjp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -212,7 +225,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
             return;
         }
         Product s = (Product) productCatalog.getValueAt(row, 0);
-//        supplier.getProductCatalog().removeProduct(s);
+        business.getProductCatalog().removeProduct(s);
         refreshTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -231,7 +244,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
 
-        CreateNewProduct cnpjp = new CreateNewProduct(userProcessContainer, supplier);
+        CreateNewProduct cnpjp = new CreateNewProduct(userProcessContainer, business);
         userProcessContainer.add("CreateNewProduct", cnpjp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
