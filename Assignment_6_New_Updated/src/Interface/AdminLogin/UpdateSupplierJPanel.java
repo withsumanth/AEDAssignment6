@@ -38,6 +38,9 @@ public class UpdateSupplierJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         activeBtn = new javax.swing.JRadioButton();
         disabledBtn = new javax.swing.JRadioButton();
+        updateUserBtn = new javax.swing.JButton();
+        saveBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -67,11 +70,72 @@ public class UpdateSupplierJPanel extends javax.swing.JPanel {
         disabledBtn.setText("Disabled");
         disabledBtn.setEnabled(false);
         add(disabledBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, -1, -1));
+
+        updateUserBtn.setText("Update");
+        updateUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateUserBtnActionPerformed(evt);
+            }
+        });
+        add(updateUserBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 80, 30));
+
+        saveBtn.setText("Save");
+        saveBtn.setEnabled(false);
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtnActionPerformed(evt);
+            }
+        });
+        add(saveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 70, 30));
+
+        backBtn.setText("<< Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void updateUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserBtnActionPerformed
+        activeBtn.setEnabled(true);
+        disabledBtn.setEnabled(true);
+        saveBtn.setEnabled(true);
+        updateUserBtn.setEnabled(false);
+    }//GEN-LAST:event_updateUserBtnActionPerformed
+
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        activeBtn.setEnabled(false);
+        disabledBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        updateUserBtn.setEnabled(true);
+        if(currentUser.getUserName().equals(person.getUser().getUserName())){
+            activeBtn.setSelected(true);
+            JOptionPane.showMessageDialog(null, "User cannot disable his own account");
+            return;
+        }
+        if(activeBtn.isSelected()){
+            person.getUser().setAccountStatus("Active");
+        }else if(disabledBtn.isSelected()){
+            person.getUser().setAccountStatus("Disabled");
+        }
+        JOptionPane.showMessageDialog(null, "User Account Updated Successfully");
+    }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ManageSystemAdminJPanel panel = (ManageSystemAdminJPanel) component;
+        panel.populateJTable();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton activeBtn;
+    private javax.swing.JButton backBtn;
     private javax.swing.JRadioButton disabledBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -82,5 +146,7 @@ public class UpdateSupplierJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton saveBtn;
+    private javax.swing.JButton updateUserBtn;
     // End of variables declaration//GEN-END:variables
 }
