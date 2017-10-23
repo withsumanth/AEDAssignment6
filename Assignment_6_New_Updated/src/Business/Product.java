@@ -10,6 +10,8 @@ package Business;
  * @author JAI JINENDRA
  */
 public class Product {
+    
+    //commit
 
     private String prodName;
     public int price;
