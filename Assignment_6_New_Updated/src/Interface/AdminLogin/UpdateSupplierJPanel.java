@@ -149,7 +149,7 @@ public class UpdateSupplierJPanel extends javax.swing.JPanel {
     private void updateUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserBtnActionPerformed
         saveBtn.setEnabled(true);
         suppNameTxt.setEnabled(true);
-        suppUserNameTxt.setEnabled(true);
+        //suppUserNameTxt.setEnabled(true);
         suppPassTxt.setEnabled(true);
         suppConfPassTxt.setEnabled(true);      
         updateUserBtn.setEnabled(false);
@@ -178,12 +178,12 @@ public class UpdateSupplierJPanel extends javax.swing.JPanel {
             return;
         }
         supplier.setSuppName(name);
-        supplier.setSuppUserName(userName);
+        //supplier.setSuppUserName(userName);
         supplier.setSuppPassword(business.getPassEncryption().encrypt(password));
         saveBtn.setEnabled(false);
         updateUserBtn.setEnabled(true);
         suppNameTxt.setEnabled(false);
-        suppUserNameTxt.setEnabled(false);
+        //suppUserNameTxt.setEnabled(false);
         suppPassTxt.setEnabled(false);
         suppConfPassTxt.setEnabled(false);
         JOptionPane.showMessageDialog(null, "User Account Updated Successfully");

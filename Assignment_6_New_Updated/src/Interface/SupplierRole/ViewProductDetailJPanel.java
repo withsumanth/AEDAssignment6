@@ -8,6 +8,7 @@ package Interface.SupplierRole;
 import Business.Product;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -143,12 +144,36 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         txtTarget.setEditable(true);
         txtAvail.setEditable(true);
         btnSave.setEnabled(true);
+        btnUpdate.setEnabled(false);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        product.setPrice(Integer.parseInt(txtPrice.getText()));
-        product.setTargetPrice(Integer.parseInt(txtTarget.getText()));
+        if(txtPrice.getText().trim().length()==0 || txtTarget.getText().trim().length()==0 || txtName.getText().trim().length()==0 || txtAvail.getText().trim().length()==0){
+            JOptionPane.showMessageDialog(null, "Please enter all the details");
+            return;
+        }
+        int price ;
+        int targetPrice ;
+        int avai ;
+        try{
+            price = Integer.parseInt(txtPrice.getText());
+            targetPrice = Integer.parseInt(txtTarget.getText());
+            avai = Integer.parseInt(txtAvail.getText());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Please enter integer values for availablity and price");
+            return;
+        }
+        product.setPrice(price);
+        product.setTargetPrice(targetPrice);
         product.setProdName(txtName.getText());
+        product.setAvail(avai);
+        txtName.setEditable(false);
+        txtPrice.setEditable(false);
+        txtTarget.setEditable(false);
+        txtAvail.setEditable(false);
+        btnSave.setEnabled(false);
+        btnUpdate.setEnabled(true);
+        JOptionPane.showMessageDialog(null, "Product updated successfully");
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

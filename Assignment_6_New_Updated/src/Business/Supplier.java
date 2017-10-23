@@ -14,9 +14,21 @@ public class Supplier {
     private String suppUserName;
     private String suppPassword;
     private String suppAccStatus;
-    private Product product;
+    private ProductCatalog productCatalag;
     private String suppRole;
 
+    public Supplier() {
+        productCatalag = new ProductCatalog();
+    }
+
+    public ProductCatalog getProductCatalag() {
+        return productCatalag;
+    }
+
+    public void setProductCatalag(ProductCatalog productCatalag) {
+        this.productCatalag = productCatalag;
+    }
+    
     public String getSuppRole() {
         return suppRole;
     }
@@ -25,10 +37,6 @@ public class Supplier {
         this.suppRole = suppRole;
     }
     
-    public Supplier() {
-        product = new Product();
-    }
-
     public String getSuppAccStatus() {
         return suppAccStatus;
     }
@@ -53,14 +61,6 @@ public class Supplier {
         this.suppPassword = suppPassword;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-    
     public String getSuppName() {
         return suppName;
     }

@@ -32,28 +32,24 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Business business;
+    Supplier supplier;
 
-    public ManageProductCatalogJPanel(JPanel upc, Business b) {
+    public ManageProductCatalogJPanel(JPanel upc, Business b , Supplier supplier) {
         initComponents();
         userProcessContainer = upc;
         business = b;
-        addAllProducts();
+        this.supplier = supplier;
+        txtName.setText(supplier.getSuppName());
+        if(supplier.getProductCatalag().getProductCatalogDir().size()==0){
+            addAllProducts();
+        }
         refreshTable();
     }
 
     public void refreshTable() {
-        /*int rowCount = productCatalog.getRowCount();
-        DefaultTableModel model = (DefaultTableModel) productCatalog.getModel();
-        for (int i = rowCount - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        for (Product p : business.getProductCatalog().getProductCatalogDir()) {
-         */
-
         DefaultTableModel model = (DefaultTableModel) productCatalog.getModel();
         model.setRowCount(0);
-        for (Product p : business.getProductCatalog().getProductCatalogDir()) {
+        for (Product p : supplier.getProductCatalag().getProductCatalogDir()) {
             Object row[] = new Object[5];
             row[0] = p;
             row[1] = p.getModelNumber();
@@ -65,7 +61,8 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
     }
 
     public void addAllProducts() {
-        String csvFile = "Product.csv";
+        String userName = supplier.getSuppUserName();
+        String csvFile = "Product"+userName+".csv";
         BufferedReader bufferedReader = null;
         String line = "";
         String cvsSplitBy = ",";
@@ -79,7 +76,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
                 count++;
             }
             for (int i = 1; i < dataCsvArr.size(); i++) {
-                Product prod = business.getProductCatalog().addProduct();
+                Product prod = supplier.getProductCatalag().addProduct();
                 String valuesOfArray[] = dataCsvArr.get(i);
                 prod.setProdName(valuesOfArray[0]);
                 prod.setModelNumber(Integer.parseInt(valuesOfArray[1]));
@@ -112,7 +109,6 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
         productCatalog = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
-        btnCreate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -122,14 +118,14 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 29, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Supplier:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 69, 170, -1));
+        jLabel2.setText("Supplier Name:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 170, -1));
 
         txtName.setEditable(false);
         txtName.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
         txtName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtName.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, new java.awt.Color(102, 102, 102), null, null));
-        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 89, 150, 30));
+        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 150, 30));
 
         btnSearch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSearch.setText("Search >>");
@@ -186,15 +182,6 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
         });
         add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(443, 349, 220, -1));
 
-        btnCreate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnCreate.setText("Create New Product >>");
-        btnCreate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateActionPerformed(evt);
-            }
-        });
-        add(btnCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(443, 389, -1, -1));
-
         btnBack.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +194,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        SearchForProductJPanel sfpjp = new SearchForProductJPanel(userProcessContainer, business);
+        SearchForProductJPanel sfpjp = new SearchForProductJPanel(userProcessContainer, supplier);
         userProcessContainer.add("SearchForProductJPanel", sfpjp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -222,8 +209,9 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
             return;
         }
         Product s = (Product) productCatalog.getValueAt(row, 0);
-        business.getProductCatalog().removeProduct(s);
+        supplier.getProductCatalag().removeProduct(s);
         refreshTable();
+        JOptionPane.showMessageDialog(null, "Product deleted successfully");
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
@@ -239,14 +227,6 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnViewActionPerformed
 
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-
-        CreateNewProduct cnpjp = new CreateNewProduct(userProcessContainer, business);
-        userProcessContainer.add("CreateNewProduct", cnpjp);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnCreateActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
         userProcessContainer.remove(this);
@@ -257,7 +237,6 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnView;

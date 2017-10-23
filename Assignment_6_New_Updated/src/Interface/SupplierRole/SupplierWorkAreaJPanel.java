@@ -28,6 +28,7 @@ public class SupplierWorkAreaJPanel extends javax.swing.JPanel {
         this.business = business;
         this.supplier = supplier;
         this.userProcessContainer = userProcessContainer;
+        userNameTxtField.setText(supplier.getSuppUserName());
     }
 
     /**
@@ -41,12 +42,14 @@ public class SupplierWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         managePButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        userNameTxtField = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("My Work Area (Product Manager Role)");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 60, -1, -1));
+        jLabel1.setText("Supplier Work Area (Product Manager Role)");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         managePButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         managePButton.setText("Manage Product Catalog >>");
@@ -55,12 +58,18 @@ public class SupplierWorkAreaJPanel extends javax.swing.JPanel {
                 managePButtonActionPerformed(evt);
             }
         });
-        add(managePButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 140, -1, -1));
+        add(managePButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
+
+        jLabel2.setText("UserName");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 100, 30));
+
+        userNameTxtField.setEnabled(false);
+        add(userNameTxtField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 90, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void managePButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managePButtonActionPerformed
 
-        ManageProductCatalogJPanel mpcjp = new ManageProductCatalogJPanel(userProcessContainer, business);
+        ManageProductCatalogJPanel mpcjp = new ManageProductCatalogJPanel(userProcessContainer, business,supplier);
         userProcessContainer.add("ManageProductCatalogJPanel", mpcjp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -69,6 +78,8 @@ public class SupplierWorkAreaJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton managePButton;
+    private javax.swing.JTextField userNameTxtField;
     // End of variables declaration//GEN-END:variables
 }

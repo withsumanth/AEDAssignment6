@@ -23,12 +23,12 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
      * Creates new form SearchForProductJPanel
      */
     JPanel userProcessContainer;
-    Business business;
+    Supplier supplier;
 
-    public SearchForProductJPanel(JPanel upc, Business b) {
+    public SearchForProductJPanel(JPanel upc, Supplier supplier) {
         initComponents();
         userProcessContainer = upc;
-        business= b;
+        this.supplier = supplier;
     }
 
     /**
@@ -93,8 +93,13 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
 
         try {
             Product p;
+            String prodId = txtId.getText();
+            if(prodId.trim().length()==0){
+                JOptionPane.showMessageDialog(null, "Please enter product id");
+                return;
+            }
             int productId = Integer.parseInt(txtId.getText());
-            p = business.getProductCatalog().searchProduct(productId);
+            p = supplier.getProductCatalag().searchProduct(productId);
             if (p != null) {
                 SearchResultJPanel vpdjp = new SearchResultJPanel(userProcessContainer, p);
                 userProcessContainer.add("SearchResultJPanel", vpdjp);

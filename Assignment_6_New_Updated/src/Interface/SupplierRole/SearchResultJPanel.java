@@ -48,8 +48,6 @@ public class SearchResultJPanel extends javax.swing.JPanel {
         txtName = new javax.swing.JTextField();
         txtId = new javax.swing.JTextField();
         txtPrice = new javax.swing.JTextField();
-        btnUpdate = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtAvail = new javax.swing.JTextField();
@@ -89,25 +87,6 @@ public class SearchResultJPanel extends javax.swing.JPanel {
         txtPrice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 252, 159, -1));
 
-        btnUpdate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnUpdate.setText("Update Product");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 391, 176, -1));
-
-        btnSave.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnSave.setText("SAVE");
-        btnSave.setEnabled(false);
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 391, 70, 30));
-
         btnBack.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -134,23 +113,6 @@ public class SearchResultJPanel extends javax.swing.JPanel {
         add(txtTargetPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 159, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-
-        //txtId.setEditable(true);
-        txtName.setEditable(true);
-        txtPrice.setEditable(true);
-        txtTargetPrice.setEditable(true);
-        txtAvail.setEditable(true);
-        btnSave.setEnabled(true);
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        product.setPrice(Integer.parseInt(txtPrice.getText()));
-        product.setTargetPrice(Integer.parseInt(txtTargetPrice.getText()));
-        product.setProdName(txtName.getText());
-        product.setAvail(Integer.parseInt(txtAvail.getText()));
-    }//GEN-LAST:event_btnSaveActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -161,8 +123,6 @@ public class SearchResultJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
