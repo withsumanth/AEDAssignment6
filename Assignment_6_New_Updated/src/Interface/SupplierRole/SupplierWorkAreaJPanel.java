@@ -42,8 +42,11 @@ public class SupplierWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         managePButton = new javax.swing.JButton();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("My Work Area (Product Manager Role)");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 60, -1, -1));
 
         managePButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         managePButton.setText("Manage Product Catalog >>");
@@ -52,29 +55,7 @@ public class SupplierWorkAreaJPanel extends javax.swing.JPanel {
                 managePButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(managePButton)))
-                .addContainerGap(55, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel1)
-                .addGap(51, 51, 51)
-                .addComponent(managePButton)
-                .addContainerGap(209, Short.MAX_VALUE))
-        );
+        add(managePButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 140, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void managePButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managePButtonActionPerformed

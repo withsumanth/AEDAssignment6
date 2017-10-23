@@ -8,7 +8,15 @@ package Interface.SupplierRole;
 import Business.Business;
 import Business.Product;
 import Business.Supplier;
+import Interface.AdminLogin.ManageSupplierJPanel;
 import java.awt.CardLayout;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -29,24 +37,61 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
         initComponents();
         userProcessContainer = upc;
         business = b;
-        //txtName.setText(s.getSupplyName());
+        addAllProducts();
         refreshTable();
     }
 
     public void refreshTable() {
-        int rowCount = productCatalog.getRowCount();
+        /*int rowCount = productCatalog.getRowCount();
         DefaultTableModel model = (DefaultTableModel) productCatalog.getModel();
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
 
         for (Product p : business.getProductCatalog().getProductCatalogDir()) {
-            Object row[] = new Object[4];
+         */
+
+        DefaultTableModel model = (DefaultTableModel) productCatalog.getModel();
+        model.setRowCount(0);
+        for (Product p : business.getProductCatalog().getProductCatalogDir()) {
+            Object row[] = new Object[5];
             row[0] = p;
             row[1] = p.getModelNumber();
             row[2] = p.getPrice();
-            row[3]=p.getAvail();
+            row[3] = p.getTargetPrice();
+            row[4] = p.getAvail();
             model.addRow(row);
+        }
+    }
+
+    public void addAllProducts() {
+        String csvFile = "Product.csv";
+        BufferedReader bufferedReader = null;
+        String line = "";
+        String cvsSplitBy = ",";
+        try {
+            bufferedReader = new BufferedReader(new FileReader(csvFile));
+            ArrayList<String[]> dataCsvArr = new ArrayList();
+            int count = 0;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] dataFromCsv = line.split(cvsSplitBy);
+                dataCsvArr.add(count, dataFromCsv);
+                count++;
+            }
+            for (int i = 1; i < dataCsvArr.size(); i++) {
+                Product prod = business.getProductCatalog().addProduct();
+                String valuesOfArray[] = dataCsvArr.get(i);
+                prod.setProdName(valuesOfArray[0]);
+                prod.setModelNumber(Integer.parseInt(valuesOfArray[1]));
+                prod.setPrice(Integer.parseInt(valuesOfArray[2]));
+                prod.setTargetPrice(Integer.parseInt(valuesOfArray[3]));
+                prod.setAvail(Integer.parseInt(valuesOfArray[4]));
+            }
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException ex) {
+            Logger.getLogger(ManageSupplierJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -70,16 +115,21 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
         btnCreate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Manage Product Catalog");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 29, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Supplier:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 69, 170, -1));
 
         txtName.setEditable(false);
         txtName.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
         txtName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtName.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, new java.awt.Color(102, 102, 102), null, null));
+        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 89, 150, 30));
 
         btnSearch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSearch.setText("Search >>");
@@ -88,6 +138,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
                 btnSearchActionPerformed(evt);
             }
         });
+        add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 119, 130, -1));
 
         productCatalog.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         productCatalog.setModel(new javax.swing.table.DefaultTableModel(
@@ -95,11 +146,11 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Product Name", "Product ID", "Price", "Availability"
+                "Product Name", "Product ID", "Actual Price", "Target Price", "Availability"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -112,7 +163,10 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
             productCatalog.getColumnModel().getColumn(1).setResizable(false);
             productCatalog.getColumnModel().getColumn(2).setResizable(false);
             productCatalog.getColumnModel().getColumn(3).setResizable(false);
+            productCatalog.getColumnModel().getColumn(4).setResizable(false);
         }
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 159, 500, 170));
 
         btnDelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnDelete.setText("Delete Product(s)");
@@ -121,6 +175,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 349, 190, -1));
 
         btnView.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnView.setText("View Product Detail >>");
@@ -129,6 +184,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
                 btnViewActionPerformed(evt);
             }
         });
+        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(443, 349, 220, -1));
 
         btnCreate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnCreate.setText("Create New Product >>");
@@ -137,6 +193,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
                 btnCreateActionPerformed(evt);
             }
         });
+        add(btnCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(443, 389, -1, -1));
 
         btnBack.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnBack.setText("<< Back");
@@ -145,67 +202,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 797, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 133, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(400, 400, 400)
-                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(90, 90, 90)
-                            .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(310, 310, 310)
-                            .addComponent(btnCreate))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 133, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 29, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addGap(11, 11, 11)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel2))
-                    .addComponent(btnSearch)
-                    .addGap(9, 9, 9)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnDelete)
-                        .addComponent(btnView))
-                    .addGap(9, 9, 9)
-                    .addComponent(btnCreate)
-                    .addGap(19, 19, 19)
-                    .addComponent(btnBack)
-                    .addGap(0, 29, Short.MAX_VALUE)))
-        );
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 439, 110, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed

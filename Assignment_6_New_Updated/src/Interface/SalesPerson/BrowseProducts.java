@@ -218,7 +218,7 @@ public class BrowseProducts extends javax.swing.JPanel {
 
     private void viewProdjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProdjButton2ActionPerformed
         // TODO add your handling code here:
-       /* int row = productTable.getSelectedRow();
+        /* int row = productTable.getSelectedRow();
         if(row<0){
             JOptionPane.showMessageDialog(null, "Pls select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
@@ -232,7 +232,7 @@ public class BrowseProducts extends javax.swing.JPanel {
 
     private void addtoCartButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtoCartButton6ActionPerformed
         // TODO add your handling code here:
-       /* int selectedROw = productTable.getSelectedRow();
+        /* int selectedROw = productTable.getSelectedRow();
 
         if(selectedROw<0){
             JOptionPane.showMessageDialog(null, "Please Select the Row");
@@ -289,11 +289,13 @@ public class BrowseProducts extends javax.swing.JPanel {
     }//GEN-LAST:event_addtoCartButton6ActionPerformed
 
     private void btnSearchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchProductActionPerformed
-       /* String prodName = txtSearchKeyWord.getText();
+        /* String prodName = txtSearchKeyWord.getText();
         refreshProductTable(prodName);
+         */
     }//GEN-LAST:event_btnSearchProductActionPerformed
 
     private void btnViewOrderItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewOrderItemActionPerformed
+        /*
         int row = orderTable.getSelectedRow();
         if(row<0){
             JOptionPane.showMessageDialog(null, "Pls select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -333,11 +335,11 @@ public class BrowseProducts extends javax.swing.JPanel {
             oi.getProduct().setAvailNum(currentAvail + (oldqty - newqty));
             populateTable();
             refreshOrderTable(); */
-        }
+
     }//GEN-LAST:event_btnModifyQuantityActionPerformed
 
     private void btnRemoveOrderItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveOrderItemActionPerformed
-       /* int row = orderTable.getSelectedRow();
+        /* int row = orderTable.getSelectedRow();
         if(row<0){
             JOptionPane.showMessageDialog(null, "Pls select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
@@ -358,7 +360,7 @@ public class BrowseProducts extends javax.swing.JPanel {
 
     private void btnCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckOutActionPerformed
         // TODO add your handling code here:
-      /*  if(order.getOrderItemList().size()>0){
+        /*  if(order.getOrderItemList().size()>0){
 
             masterOrderCatalog.addOrder(order);
             JOptionPane.showMessageDialog(null, "Order Placed Sucessfully");

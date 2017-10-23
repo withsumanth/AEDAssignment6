@@ -10,11 +10,18 @@ package Business;
  * @author JAI JINENDRA
  */
 public class Product {
-    
-    //commit
 
     private String prodName;
     public int price;
+    public int targetPrice;
+
+    public int getTargetPrice() {
+        return targetPrice;
+    }
+
+    public void setTargetPrice(int targetPrice) {
+        this.targetPrice = targetPrice;
+    }
     private int modelNumber;
     private int avail;
 
