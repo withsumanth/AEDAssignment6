@@ -13,6 +13,15 @@ public class AdminLogin {
     private String adminUserName;
     private String adminPassword;
     private String accountStatus;
+    private String adminRole;
+
+    public String getAdminRole() {
+        return adminRole;
+    }
+
+    public void setAdminRole(String adminRole) {
+        this.adminRole = adminRole;
+    }
 
     public String getAdminUserName() {
         return adminUserName;

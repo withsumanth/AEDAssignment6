@@ -15,6 +15,15 @@ public class SalesPerson {
     private String salesUserName;
     private String salesPassword;
     private String salesAccountStatus;
+    private String salesPersonRole;
+
+    public String getSalesPersonRole() {
+        return salesPersonRole;
+    }
+
+    public void setSalesPersonRole(String salesPersonRole) {
+        this.salesPersonRole = salesPersonRole;
+    }
 
     public String getSalesAccountStatus() {
         return salesAccountStatus;
@@ -46,5 +55,10 @@ public class SalesPerson {
 
     public void setSalesPassword(String salesPassword) {
         this.salesPassword = salesPassword;
+    }
+    
+    @Override
+    public String toString(){
+        return salesPersonName;
     }
 }

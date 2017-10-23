@@ -58,7 +58,7 @@ public class SupplierDirectory {
     
     public Supplier searchSupplier(String keyword){
         for (Supplier supplier : supplierDir) {
-            if(supplier.getSuppName().equals(keyword)){
+            if(supplier.getSuppUserName().equals(keyword)){
                 return supplier;
             }
         }
@@ -77,5 +77,14 @@ public class SupplierDirectory {
             }
         }
         return null;
+    }
+    
+    public boolean checkUserName(String userName){
+        for(Supplier s:supplierDir){
+            if(s.getSuppUserName().equals(userName)){
+                return true;
+            }
+        }
+        return false;
     }
 }

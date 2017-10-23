@@ -117,18 +117,19 @@ public class AdminJPanel extends javax.swing.JPanel {
         if (admin != null) {
 
             AdminWorkAreaJPanel panel = new AdminWorkAreaJPanel(userProcessContainer, business, admin);
-            //SupplierWorkAreaJPanel panel = new SupplierWorkAreaJPanel(userProcessContainer, business, supplier);
             userProcessContainer.add("AdminWorkAreaJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
         } else if (salesPerson != null) {
             SalesPersonWorkAreaJPanel panel = new SalesPersonWorkAreaJPanel(userProcessContainer, business, salesPerson);
-            userProcessContainer.add("SupplierWorkAreaJPanel", panel);
+            userProcessContainer.add("SalesPersonWorkAreaJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
         } else if (supplier != null) {
             SupplierWorkAreaJPanel panel = new SupplierWorkAreaJPanel(userProcessContainer, business, supplier);
             userProcessContainer.add("SupplierWorkAreaJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
         } else {
             JOptionPane.showMessageDialog(null, "UserName/Password entered is invalid");
             return;

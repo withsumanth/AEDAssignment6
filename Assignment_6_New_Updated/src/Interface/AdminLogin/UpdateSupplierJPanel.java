@@ -5,6 +5,13 @@
  */
 package Interface.AdminLogin;
 
+import Business.Business;
+import Business.Supplier;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Sumanth
@@ -14,10 +21,29 @@ public class UpdateSupplierJPanel extends javax.swing.JPanel {
     /**
      * Creates new form updateSupplierJPanel
      */
-    public UpdateSupplierJPanel() {
+    
+    JPanel userProcessContainer;
+    Business business;
+    Supplier supplier;
+    UpdateSupplierJPanel(JPanel userProcessContainer, Business business ,Supplier supplier) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.business=business;
+        this.supplier=supplier;
+        setAllValues();
     }
-
+    
+    public void setAllValues(){
+        suppNameTxt.setText(supplier.getSuppName());
+        suppUserNameTxt.setText(supplier.getSuppUserName());
+        suppPassTxt.setText(supplier.getSuppPassword());
+        suppConfPassTxt.setText("");
+        if(supplier.getSuppAccStatus().equals("Active")){
+            activeBtn.setSelected(true);
+        }else if(supplier.getSuppAccStatus().equals("Disabled")){
+            disabledBtn.setSelected(true);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,49 +53,54 @@ public class UpdateSupplierJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        suppNameTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        suppUserNameTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         activeBtn = new javax.swing.JRadioButton();
         disabledBtn = new javax.swing.JRadioButton();
         updateUserBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
+        suppConfPassTxt = new javax.swing.JPasswordField();
+        suppPassTxt = new javax.swing.JPasswordField();
+        jLabel6 = new javax.swing.JLabel();
+        updateAccStaBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Supplier Name");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 100, 30));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 110, 30));
+
+        suppNameTxt.setEnabled(false);
+        add(suppNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 110, 30));
 
         jLabel2.setText("Supplier UserName");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 100, 30));
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 110, 30));
+
+        suppUserNameTxt.setEnabled(false);
+        add(suppUserNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 110, 30));
 
         jLabel3.setText("Supplier Password");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 100, 30));
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 110, 30));
 
         jLabel4.setText("Confirm Password");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 100, 30));
-        add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 110, 30));
 
         jLabel5.setText("Account Status");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 160, 40));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 160, 30));
 
+        buttonGroup1.add(activeBtn);
         activeBtn.setText("Active");
-        activeBtn.setEnabled(false);
-        add(activeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
+        add(activeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, -1, 20));
 
+        buttonGroup1.add(disabledBtn);
         disabledBtn.setText("Disabled");
-        disabledBtn.setEnabled(false);
-        add(disabledBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, -1, -1));
+        add(disabledBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, -1, 20));
 
         updateUserBtn.setText("Update");
         updateUserBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -95,30 +126,66 @@ public class UpdateSupplierJPanel extends javax.swing.JPanel {
             }
         });
         add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, -1));
+
+        suppConfPassTxt.setEnabled(false);
+        add(suppConfPassTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 110, 30));
+
+        suppPassTxt.setEnabled(false);
+        add(suppPassTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 110, 30));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText("           Update Suppliers");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 200, 40));
+
+        updateAccStaBtn.setText("Update Account Status");
+        updateAccStaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateAccStaBtnActionPerformed(evt);
+            }
+        });
+        add(updateAccStaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 240, 150, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserBtnActionPerformed
-        activeBtn.setEnabled(true);
-        disabledBtn.setEnabled(true);
         saveBtn.setEnabled(true);
+        suppNameTxt.setEnabled(true);
+        suppUserNameTxt.setEnabled(true);
+        suppPassTxt.setEnabled(true);
+        suppConfPassTxt.setEnabled(true);      
         updateUserBtn.setEnabled(false);
+        suppPassTxt.setText("");
+        suppConfPassTxt.setText("");
     }//GEN-LAST:event_updateUserBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        activeBtn.setEnabled(false);
-        disabledBtn.setEnabled(false);
-        saveBtn.setEnabled(false);
-        updateUserBtn.setEnabled(true);
-        if(currentUser.getUserName().equals(person.getUser().getUserName())){
-            activeBtn.setSelected(true);
-            JOptionPane.showMessageDialog(null, "User cannot disable his own account");
+        String name = suppNameTxt.getText();
+        String userName = suppUserNameTxt.getText();
+        String password = suppPassTxt.getText();
+        String confirmPass = suppConfPassTxt.getText();
+       
+            if(name.trim().length()==0 || userName.trim().length()==0 || password.trim().length()==0 || confirmPass.trim().length()==0){
+            JOptionPane.showMessageDialog(null, "Please enter all the field");
+            return;
+            }
+        if(!supplier.getSuppUserName().equals(userName)){
+            if(business.getAdminLoginDirectory().checkUserName(userName) || business.getSupplierDir().checkUserName(userName) || business.getSalespersonDir().checkUserName(userName)){
+            JOptionPane.showMessageDialog(null, "UserName already exists in the database. Please enter different username");
             return;
         }
-        if(activeBtn.isSelected()){
-            person.getUser().setAccountStatus("Active");
-        }else if(disabledBtn.isSelected()){
-            person.getUser().setAccountStatus("Disabled");
         }
+        if(!business.getPassEncryption().encrypt(password).equals(business.getPassEncryption().encrypt(confirmPass))){
+            JOptionPane.showMessageDialog(null, "Confirm Password did not match");
+            return;
+        }
+        supplier.setSuppName(name);
+        supplier.setSuppUserName(userName);
+        supplier.setSuppPassword(business.getPassEncryption().encrypt(password));
+        saveBtn.setEnabled(false);
+        updateUserBtn.setEnabled(true);
+        suppNameTxt.setEnabled(false);
+        suppUserNameTxt.setEnabled(false);
+        suppPassTxt.setEnabled(false);
+        suppConfPassTxt.setEnabled(false);
         JOptionPane.showMessageDialog(null, "User Account Updated Successfully");
     }//GEN-LAST:event_saveBtnActionPerformed
 
@@ -126,27 +193,39 @@ public class UpdateSupplierJPanel extends javax.swing.JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManageSystemAdminJPanel panel = (ManageSystemAdminJPanel) component;
+        ManageSupplierJPanel panel = (ManageSupplierJPanel) component;
         panel.populateJTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backBtnActionPerformed
 
+    private void updateAccStaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAccStaBtnActionPerformed
+        if(activeBtn.isSelected()){
+            supplier.setSuppAccStatus("Active");
+        }else if(disabledBtn.isSelected()){
+            supplier.setSuppAccStatus("Disabled");
+        }
+        JOptionPane.showMessageDialog(null, "User Account Updated Successfully");
+    }//GEN-LAST:event_updateAccStaBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton activeBtn;
     private javax.swing.JButton backBtn;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton disabledBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton saveBtn;
+    private javax.swing.JPasswordField suppConfPassTxt;
+    private javax.swing.JTextField suppNameTxt;
+    private javax.swing.JPasswordField suppPassTxt;
+    private javax.swing.JTextField suppUserNameTxt;
+    private javax.swing.JButton updateAccStaBtn;
     private javax.swing.JButton updateUserBtn;
     // End of variables declaration//GEN-END:variables
 }

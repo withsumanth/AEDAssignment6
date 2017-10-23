@@ -8,6 +8,7 @@ package Interface.AdminLogin;
 import Business.AdminLogin;
 import Business.Business;
 import Business.Supplier;
+import java.awt.CardLayout;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -31,13 +32,16 @@ public class ManageSupplierJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     Business business;
     AdminLogin admin;
+    boolean check = false;
     
     ManageSupplierJPanel(JPanel userProcessContainer, Business business, AdminLogin admin) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.business=business;
         this.admin = admin;
-        addAllSuppliers();
+        if(business.getSupplierDir().getSupplierDir().size()==0){
+            addAllSuppliers();
+        }
         populateJTable();
     }
     
@@ -75,6 +79,7 @@ public class ManageSupplierJPanel extends javax.swing.JPanel {
                         suppDet.setSuppUserName(valuesOfArray[1]);
                         suppDet.setSuppPassword(business.getPassEncryption().encrypt(valuesOfArray[2]));
                         suppDet.setSuppAccStatus(valuesOfArray[3]);
+                        suppDet.setSuppRole("Supplier");
                     }
 	            bufferedReader.close();
 	        } catch (FileNotFoundException e) {
@@ -99,11 +104,21 @@ public class ManageSupplierJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         delSuppBtn = new javax.swing.JButton();
         updSuppBtn = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        supplierSearchTable = new javax.swing.JTable();
+        searchBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        searchUserNameTxt = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         backBtn.setText("<< Back");
-        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, -1, -1));
 
         supplierTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,6 +159,38 @@ public class ManageSupplierJPanel extends javax.swing.JPanel {
             }
         });
         add(updSuppBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 340, -1, -1));
+
+        supplierSearchTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Supplier Name", "Supplier UserName", "Password", "Account Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(supplierSearchTable);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 730, 110));
+
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
+        add(searchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, -1, -1));
+
+        jLabel2.setText("Enter Username");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 140, 40));
+        add(searchUserNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 170, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void delSuppBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delSuppBtnActionPerformed
@@ -164,19 +211,56 @@ public class ManageSupplierJPanel extends javax.swing.JPanel {
     private void updSuppBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updSuppBtnActionPerformed
          int selectedRow = supplierTable.getSelectedRow();
         if(selectedRow>=0){
-            
+        Supplier supplier = (Supplier) supplierTable.getValueAt(selectedRow, 0);
+        UpdateSupplierJPanel panel = new UpdateSupplierJPanel(userProcessContainer,business,supplier);
+        userProcessContainer.add("UpdateSupplierJPanel", panel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
         }else{
             JOptionPane.showMessageDialog(null, "Please Select Any Row");
         }
 
     }//GEN-LAST:event_updSuppBtnActionPerformed
 
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.setAutoscrolls(true);
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        DefaultTableModel tabMod = (DefaultTableModel) supplierSearchTable.getModel();
+        tabMod.setRowCount(0);
+        String searchUserName = searchUserNameTxt.getText();
+        if(searchUserName.trim().length()==0){
+            JOptionPane.showMessageDialog(null, "Please enter UserName for search");
+            return;
+        }
+        Supplier foundSupplier = business.getSupplierDir().searchSupplier(searchUserName);
+        if(foundSupplier==null){
+            JOptionPane.showMessageDialog(null, "UserName entered is invalid");
+            return;
+        }
+        Object row[] = new Object[4];
+        row[0] = foundSupplier;
+        row[1] = foundSupplier.getSuppUserName();
+        row[2] = foundSupplier.getSuppPassword();
+        row[3] = foundSupplier.getSuppAccStatus();
+        tabMod.addRow(row);
+    }//GEN-LAST:event_searchBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
     private javax.swing.JButton delSuppBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JTextField searchUserNameTxt;
+    private javax.swing.JTable supplierSearchTable;
     private javax.swing.JTable supplierTable;
     private javax.swing.JButton updSuppBtn;
     // End of variables declaration//GEN-END:variables

@@ -21,6 +21,7 @@ public class ConfigureABusiness {
         AdminLogin admin = business.getAdminLoginDirectory().addAdmin();
         admin.setAdminUserName("john");
         admin.setAccountStatus("Active");
+        admin.setAdminRole("Admin");
         admin.setAdminPassword(business.getPassEncryption().encrypt("1"));
         return business;
     }

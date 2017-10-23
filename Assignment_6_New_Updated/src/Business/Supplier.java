@@ -15,6 +15,15 @@ public class Supplier {
     private String suppPassword;
     private String suppAccStatus;
     private Product product;
+    private String suppRole;
+
+    public String getSuppRole() {
+        return suppRole;
+    }
+
+    public void setSuppRole(String suppRole) {
+        this.suppRole = suppRole;
+    }
     
     public Supplier() {
         product = new Product();

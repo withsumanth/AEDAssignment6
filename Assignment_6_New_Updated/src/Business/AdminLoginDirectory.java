@@ -32,4 +32,13 @@ public class AdminLoginDirectory {
         }
         return null;
     }
+    
+    public boolean checkUserName(String userName){
+        for(AdminLogin s:adminLoginDirectory){
+            if(s.getAdminUserName().equals(userName)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

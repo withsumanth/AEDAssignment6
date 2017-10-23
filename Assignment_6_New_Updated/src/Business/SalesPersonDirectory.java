@@ -35,4 +35,32 @@ public class SalesPersonDirectory {
         }
         return null;
     }
+    
+    public boolean checkUserName(String userName){
+        for(SalesPerson s : salespersonDir){
+            if(s.getSalesUserName().equals(userName)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void removeSupplier(SalesPerson s){
+        salespersonDir.remove(s);
+    }
+    
+    public SalesPerson addSalesPerson(){
+        SalesPerson s = new SalesPerson();
+        salespersonDir.add(s);
+        return s;
+    }
+    
+    public SalesPerson searchSalesPerson(String keyword){
+        for (SalesPerson s : salespersonDir) {
+            if(s.getSalesUserName().equals(keyword)){
+                return s;
+            }
+        }
+        return null;
+    }
 }

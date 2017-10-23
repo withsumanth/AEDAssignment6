@@ -49,6 +49,11 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mngSalesBtn.setText("Manage Sales Person >>");
+        mngSalesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mngSalesBtnActionPerformed(evt);
+            }
+        });
         add(mngSalesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 188, 233, 32));
 
         mngSupplierJBtn.setText("Manage Suppliers >>");
@@ -64,10 +69,10 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 180, 50));
 
         userNameTxtField.setEnabled(false);
-        add(userNameTxtField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 90, 30));
+        add(userNameTxtField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 90, 30));
 
         jLabel2.setText("UserName");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 60, 30));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 100, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void mngSupplierJBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mngSupplierJBtnActionPerformed
@@ -76,6 +81,13 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_mngSupplierJBtnActionPerformed
+
+    private void mngSalesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mngSalesBtnActionPerformed
+        ManageSalesPerson panel = new ManageSalesPerson(userProcessContainer,business);
+        userProcessContainer.add("ManageSalesPerson", panel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_mngSalesBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
