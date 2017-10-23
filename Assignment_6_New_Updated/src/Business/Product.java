@@ -10,6 +10,7 @@ package Business;
  * @author JAI JINENDRA
  */
 public class Product {
+    //test
 
     private String prodName;
     public int price;
