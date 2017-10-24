@@ -19,7 +19,7 @@ public class ConfigureABusiness {
     public static Business CreateAdminUser() {
         business = new Business();
         AdminLogin admin = business.getAdminLoginDirectory().addAdmin();
-        admin.setAdminUserName("john");
+        admin.setAdminUserName("1");
         admin.setAccountStatus("Active");
         admin.setAdminRole("Admin");
         admin.setAdminPassword(business.getPassEncryption().encrypt("1"));

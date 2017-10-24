@@ -209,7 +209,7 @@ public class ManageSupplierJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_delSuppBtnActionPerformed
 
     private void updSuppBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updSuppBtnActionPerformed
-         int selectedRow = supplierTable.getSelectedRow();
+        int selectedRow = supplierTable.getSelectedRow();
         if(selectedRow>=0){
         Supplier supplier = (Supplier) supplierTable.getValueAt(selectedRow, 0);
         UpdateSupplierJPanel panel = new UpdateSupplierJPanel(userProcessContainer,business,supplier);

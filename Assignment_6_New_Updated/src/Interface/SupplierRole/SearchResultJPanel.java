@@ -28,7 +28,6 @@ public class SearchResultJPanel extends javax.swing.JPanel {
         txtName.setText(p.getProdName());
         txtId.setText(String.valueOf(p.getModelNumber()));
         txtPrice.setText(String.valueOf(p.getPrice()));
-        txtTargetPrice.setText(String.valueOf(p.getTargetPrice()));
         txtAvail.setText(String.valueOf(p.getAvail()));
     }
 
@@ -51,8 +50,6 @@ public class SearchResultJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtAvail = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtTargetPrice = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -98,19 +95,10 @@ public class SearchResultJPanel extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setText("Availability:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 336, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, -1, -1));
 
         txtAvail.setEditable(false);
-        add(txtAvail, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 160, 30));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Target Price:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 288, -1, 30));
-
-        txtTargetPrice.setEditable(false);
-        txtTargetPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtTargetPrice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(txtTargetPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 159, -1));
+        add(txtAvail, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 160, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -126,13 +114,11 @@ public class SearchResultJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField txtAvail;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtTargetPrice;
     // End of variables declaration//GEN-END:variables
 }

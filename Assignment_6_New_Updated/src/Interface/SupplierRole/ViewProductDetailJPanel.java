@@ -30,7 +30,6 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         txtName.setText(p.getProdName());
         txtId.setText(String.valueOf(p.getModelNumber()));
         txtPrice.setText(String.valueOf(p.getPrice()));
-        txtTarget.setText(String.valueOf(p.getTargetPrice()));
         txtAvail.setText(String.valueOf(p.getAvail()));
     }
 
@@ -55,8 +54,6 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtAvail = new javax.swing.JTextField();
-        txtTarget = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -121,19 +118,10 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setText("Availability:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 321, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, -1, -1));
 
         txtAvail.setEditable(false);
-        add(txtAvail, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 180, 30));
-
-        txtTarget.setEditable(false);
-        txtTarget.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtTarget.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(txtTarget, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 277, 180, -1));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Target Price:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 275, -1, 30));
+        add(txtAvail, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 180, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -141,14 +129,13 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         //txtId.setEditable(true);
         txtName.setEditable(true);
         txtPrice.setEditable(true);
-        txtTarget.setEditable(true);
         txtAvail.setEditable(true);
         btnSave.setEnabled(true);
         btnUpdate.setEnabled(false);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if(txtPrice.getText().trim().length()==0 || txtTarget.getText().trim().length()==0 || txtName.getText().trim().length()==0 || txtAvail.getText().trim().length()==0){
+        if(txtPrice.getText().trim().length()==0 || txtName.getText().trim().length()==0 || txtAvail.getText().trim().length()==0){
             JOptionPane.showMessageDialog(null, "Please enter all the details");
             return;
         }
@@ -157,19 +144,16 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         int avai ;
         try{
             price = Integer.parseInt(txtPrice.getText());
-            targetPrice = Integer.parseInt(txtTarget.getText());
             avai = Integer.parseInt(txtAvail.getText());
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Please enter integer values for availablity and price");
             return;
         }
         product.setPrice(price);
-        product.setTargetPrice(targetPrice);
         product.setProdName(txtName.getText());
         product.setAvail(avai);
         txtName.setEditable(false);
         txtPrice.setEditable(false);
-        txtTarget.setEditable(false);
         txtAvail.setEditable(false);
         btnSave.setEnabled(false);
         btnUpdate.setEnabled(true);
@@ -195,13 +179,11 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField txtAvail;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtTarget;
     // End of variables declaration//GEN-END:variables
 }

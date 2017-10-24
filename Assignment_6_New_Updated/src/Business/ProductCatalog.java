@@ -15,17 +15,17 @@ import java.util.List;
  */
 public class ProductCatalog {
     
-    private List<Product> productCatalogDir;
+    private ArrayList<Product> productCatalogDir;
 
     public ProductCatalog() {
     productCatalogDir = new ArrayList<Product>();
     }
 
-    public List<Product> getProductCatalogDir() {
+    public ArrayList<Product> getProductCatalogDir() {
         return productCatalogDir;
     }
 
-    public void setProductCatalogDir(List<Product> productCatalogDir) {
+    public void setProductCatalogDir(ArrayList<Product> productCatalogDir) {
         this.productCatalogDir = productCatalogDir;
     }
     

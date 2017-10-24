@@ -54,8 +54,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
             row[0] = p;
             row[1] = p.getModelNumber();
             row[2] = p.getPrice();
-            row[3] = p.getTargetPrice();
-            row[4] = p.getAvail();
+            row[3] = p.getAvail();
             model.addRow(row);
         }
     }
@@ -81,8 +80,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
                 prod.setProdName(valuesOfArray[0]);
                 prod.setModelNumber(Integer.parseInt(valuesOfArray[1]));
                 prod.setPrice(Integer.parseInt(valuesOfArray[2]));
-                prod.setTargetPrice(Integer.parseInt(valuesOfArray[3]));
-                prod.setAvail(Integer.parseInt(valuesOfArray[4]));
+                prod.setAvail(Integer.parseInt(valuesOfArray[3]));
             }
             bufferedReader.close();
         } catch (FileNotFoundException e) {
@@ -142,11 +140,11 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Product Name", "Product ID", "Actual Price", "Target Price", "Availability"
+                "Product Name", "Product ID", "Actual Price", "Availability"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -159,10 +157,9 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
             productCatalog.getColumnModel().getColumn(1).setResizable(false);
             productCatalog.getColumnModel().getColumn(2).setResizable(false);
             productCatalog.getColumnModel().getColumn(3).setResizable(false);
-            productCatalog.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 159, 500, 170));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 159, 740, 170));
 
         btnDelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnDelete.setText("Delete Product(s)");

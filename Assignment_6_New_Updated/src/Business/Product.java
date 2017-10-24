@@ -10,20 +10,32 @@ package Business;
  * @author JAI JINENDRA
  */
 public class Product {
+    //test
 
     private String prodName;
     public int price;
-    public int targetPrice;
-
-    public int getTargetPrice() {
-        return targetPrice;
-    }
-
-    public void setTargetPrice(int targetPrice) {
-        this.targetPrice = targetPrice;
-    }
     private int modelNumber;
     private int avail;
+    MarketOfferCatalogue marketOfferCatalogue;
+    private static int count = 0;
+    
+
+    public MarketOfferCatalogue getMarketOfferCatalogue() {
+        return marketOfferCatalogue;
+    }
+
+    public void setMarketOfferCatalogue(MarketOfferCatalogue marketOfferCatalogue) {
+        this.marketOfferCatalogue = marketOfferCatalogue;
+    }
+
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        Product.count = count;
+    }
 
     public int getAvail() {
         return avail;
@@ -32,7 +44,6 @@ public class Product {
     public void setAvail(int avail) {
         this.avail = avail;
     }
-    private static int count = 0;
 
     @Override
     public String toString() {
@@ -42,6 +53,7 @@ public class Product {
     public Product() {
         count++;
         modelNumber = count;
+        marketOfferCatalogue = new MarketOfferCatalogue();
     }
 
     public String getProdName() {

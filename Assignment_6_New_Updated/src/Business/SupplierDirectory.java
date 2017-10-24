@@ -16,7 +16,7 @@ public class SupplierDirectory {
     private static int supplierId=0;
     private String supplierName;
 
-    private List<Supplier> supplierDir;
+    private ArrayList<Supplier> supplierDir;
     public SupplierDirectory() {
     
         supplierDir = new ArrayList<Supplier>();
@@ -38,11 +38,11 @@ public class SupplierDirectory {
         this.supplierName = supplierName;
     }
 
-    public List<Supplier> getSupplierDir() {
+    public ArrayList<Supplier> getSupplierDir() {
         return supplierDir;
     }
 
-    public void setSupplierDir(List<Supplier> supplierDir) {
+    public void setSupplierDir(ArrayList<Supplier> supplierDir) {
         this.supplierDir = supplierDir;
     }
     

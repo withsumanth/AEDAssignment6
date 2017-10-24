@@ -7,7 +7,22 @@ package Interface.AdminLogin;
 
 import Business.AdminLogin;
 import Business.Business;
+import Business.MarketOffer;
+import Business.MarketOfferCatalogue;
+import Business.Product;
+import Business.SalesPerson;
+import Business.Supplier;
+import Business.SupplierDirectory;
 import java.awt.CardLayout;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -29,6 +44,22 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         this.business=business;
         this.admin = admin;
         userNameTxtField.setText(admin.getAdminUserName());
+        boolean check = false;
+        ArrayList<Supplier> suppliers = business.getSupplierDir().getSupplierDir();
+        for(Supplier s:suppliers){
+            if(s.getProductCatalag().getProductCatalogDir().size()!=0){
+                check = true;
+                break;
+            }
+        }
+        if(check){
+            offerBtn.setEnabled(true);
+        }else{
+            offerBtn.setEnabled(false);
+        }
+        if(business.getMasterOrderCatalog().getOrderList().size()!=0){
+            salesPerfBtn.setEnabled(true);
+        }
     }
 
     /**
@@ -45,6 +76,8 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         userNameTxtField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        offerBtn = new javax.swing.JButton();
+        salesPerfBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -73,6 +106,24 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("UserName");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 100, 30));
+
+        offerBtn.setText("Manage Offers for Products >>");
+        offerBtn.setEnabled(false);
+        offerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                offerBtnActionPerformed(evt);
+            }
+        });
+        add(offerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 230, 40));
+
+        salesPerfBtn.setText("Monitor Sales Performance >>");
+        salesPerfBtn.setEnabled(false);
+        salesPerfBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesPerfBtnActionPerformed(evt);
+            }
+        });
+        add(salesPerfBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 230, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void mngSupplierJBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mngSupplierJBtnActionPerformed
@@ -89,12 +140,66 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_mngSalesBtnActionPerformed
 
+    private void offerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_offerBtnActionPerformed
+        boolean check = false;
+        ArrayList<Supplier> suppliers = business.getSupplierDir().getSupplierDir();
+        for(Supplier s:suppliers){
+            if(s.getProductCatalag().getProductCatalogDir().size()!=0){
+                if(s.getProductCatalag().getProductCatalogDir().get(0).getMarketOfferCatalogue().getOfferCatalogue().size()==0){
+                 check = true;
+        ArrayList<Product> productsList = s.getProductCatalag().getProductCatalogDir();
+        for(Product p:productsList){
+            String csvFile = "Offers.csv";
+	        BufferedReader bufferedReader = null;
+	        String line = "";
+	        String cvsSplitBy = ",";
+	        try {
+	            bufferedReader = new BufferedReader(new FileReader(csvFile));
+                    ArrayList<String[]> dataCsvArr = new ArrayList();
+                    int count = 0;
+	            while ((line = bufferedReader.readLine()) != null) {
+	                String[] dataFromCsv = line.split(cvsSplitBy);
+                        dataCsvArr.add(count,dataFromCsv);
+                        count++;
+	            }
+                    for(int i=1;i<dataCsvArr.size();i++){
+                        MarketOffer offers = p.getMarketOfferCatalogue().addOffer();
+                        String valuesOfArray[] = dataCsvArr.get(i);
+                        offers.setOfferName(valuesOfArray[0]);
+                        offers.setOfferPrice(valuesOfArray[1]);
+                    }
+	            bufferedReader.close();
+	        } catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	  } catch (IOException ex) {
+               Logger.getLogger(ManageSupplierJPanel.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }
+        JOptionPane.showMessageDialog(null, "Offers added successfully to product");
+            }
+        }
+        }
+        if(!check){
+            JOptionPane.showMessageDialog(null, "Offers already added to the product");
+            return;
+        }
+    }//GEN-LAST:event_offerBtnActionPerformed
+
+    private void salesPerfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesPerfBtnActionPerformed
+        ManageRevenueJPanel panel = new ManageRevenueJPanel(userProcessContainer,business);
+        userProcessContainer.add("ManageRevenueJPanel", panel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_salesPerfBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton mngSalesBtn;
     private javax.swing.JButton mngSupplierJBtn;
+    private javax.swing.JButton offerBtn;
+    private javax.swing.JButton salesPerfBtn;
     private javax.swing.JTextField userNameTxtField;
     // End of variables declaration//GEN-END:variables
 }

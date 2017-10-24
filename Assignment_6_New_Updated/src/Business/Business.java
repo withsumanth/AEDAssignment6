@@ -15,6 +15,9 @@ public class Business {
     private SupplierDirectory supplierDir;
     private PasswordEncryption passEncryption;
     private AdminLoginDirectory adminLoginDirectory;
+    private MarketDirectory marketDirectory;
+    private MasterOrderCatalog masterOrderCatalog;
+    private MarketOfferCatalogue marketOfferCatalogue;
     
     public Business(){
         productCatalog = new ProductCatalog();
@@ -22,6 +25,33 @@ public class Business {
         supplierDir = new SupplierDirectory();
         passEncryption = new  PasswordEncryption();
         adminLoginDirectory = new AdminLoginDirectory();
+        marketDirectory  = new MarketDirectory();
+        masterOrderCatalog = new MasterOrderCatalog();
+        marketOfferCatalogue = new MarketOfferCatalogue();
+    }
+
+    public MarketOfferCatalogue getMarketOfferCatalogue() {
+        return marketOfferCatalogue;
+    }
+
+    public void setMarketOfferCatalogue(MarketOfferCatalogue marketOfferCatalogue) {
+        this.marketOfferCatalogue = marketOfferCatalogue;
+    }
+
+    public MasterOrderCatalog getMasterOrderCatalog() {
+        return masterOrderCatalog;
+    }
+
+    public void setMasterOrderCatalog(MasterOrderCatalog masterOrderCatalog) {
+        this.masterOrderCatalog = masterOrderCatalog;
+    }
+
+    public MarketDirectory getMarketDirectory() {
+        return marketDirectory;
+    }
+
+    public void setMarketDirectory(MarketDirectory marketDirectory) {
+        this.marketDirectory = marketDirectory;
     }
 
     public AdminLoginDirectory getAdminLoginDirectory() {

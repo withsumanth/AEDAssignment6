@@ -9,7 +9,7 @@ import Business.AdminLogin;
 import Business.Business;
 import Business.SalesPerson;
 import Business.Supplier;
-import Interface.SalesPerson.SalesPersonWorkAreaJPanel;
+import Interface.SalesPerson.MarketAreaJPanel;
 import Interface.SupplierRole.SupplierWorkAreaJPanel;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -121,7 +121,7 @@ public class AdminJPanel extends javax.swing.JPanel {
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
         } else if (salesPerson != null) {
-            SalesPersonWorkAreaJPanel panel = new SalesPersonWorkAreaJPanel(userProcessContainer, business, salesPerson);
+            MarketAreaJPanel panel = new MarketAreaJPanel(userProcessContainer, business, salesPerson);
             userProcessContainer.add("SalesPersonWorkAreaJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
