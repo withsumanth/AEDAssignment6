@@ -21,10 +21,6 @@ public class TotalRevenueJPanel extends javax.swing.JPanel {
     /**
      * Creates new form totalRevenueJPanel
      */
-    public TotalRevenueJPanel() {
-        
-        
-    }
     
     JPanel userProcessContainer;
     Business business;

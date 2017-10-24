@@ -11,6 +11,7 @@ import Business.OrderList;
 import Business.Product;
 import Business.Supplier;
 import Interface.AdminLogin.Revenue.ProductSalesRevenueJPanel;
+import Interface.AdminLogin.Revenue.TopTenSalesPerJPanel;
 import Interface.AdminLogin.Revenue.TotalRevenueJPanel;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -106,7 +107,10 @@ public class ManageRevenueJPanel extends javax.swing.JPanel {
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
         }else if(revenueComboBox.getSelectedItem()=="Top 10 sales persons by revenues broken down by market"){
-                
+            TopTenSalesPerJPanel panel = new TopTenSalesPerJPanel(userProcessContainer,business);
+            userProcessContainer.add("TopTenSalesPerJPanel", panel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);   
         }else if(revenueComboBox.getSelectedItem()=="Sales persons with consist above target sales"){
                 
         }else if(revenueComboBox.getSelectedItem()=="Sales person with below total order target sales"){

@@ -6,14 +6,21 @@
 package Interface.AdminLogin.Revenue;
 
 import Business.Business;
-import Business.Market;
 import Business.Order;
 import Business.OrderList;
 import Business.Product;
+import Business.SalesPerson;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,17 +28,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Sumanth
  */
-public class ProductSalesRevenueJPanel extends javax.swing.JPanel {
+public class TopTenSalesPerJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ProductSalesRevenueJPanel
+     * Creates new form TopTenSalesPerJPanel
      */
+    List<String> salesPerson;
     JPanel userProcessContainer;
     Business business;
-    public ProductSalesRevenueJPanel(JPanel userProcessContainer, Business business) {
+    public TopTenSalesPerJPanel(JPanel userProcessContainer, Business business) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.business =business;
+        salesPerson = new ArrayList();
         salesRevenue();
     }
     
@@ -41,9 +50,11 @@ public class ProductSalesRevenueJPanel extends javax.swing.JPanel {
         for(OrderList ol:listOfOrders){
             for(Order o:ol.getOrderList()){
                 allMarkets.add(o.getMarket().getMarketName());
+                salesPerson.add(o.getSalesPerson().getSalesPersonName());
             }
         }
         allMarkets = allMarkets.stream().distinct().collect(Collectors.toList());
+        salesPerson = salesPerson.stream().distinct().collect(Collectors.toList());
         marketNameBox.removeAllItems();
         for (String s : allMarkets) {
             marketNameBox.addItem(s);
@@ -61,40 +72,30 @@ public class ProductSalesRevenueJPanel extends javax.swing.JPanel {
 
         marketNameBox = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
-        btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         prodJTable = new javax.swing.JTable();
-        revenueTxt = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         searchBtn = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        add(marketNameBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 230, 60));
+        add(marketNameBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 230, 60));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("       Product sales revenues by market");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 310, 50));
-
-        btnBack.setText("<<Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
+        jLabel1.setText("Top 10 sales persons by revenues broken down by market");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 500, 50));
 
         prodJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Product Name"
+                "Sales Person Name", "Revenue"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -103,13 +104,7 @@ public class ProductSalesRevenueJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(prodJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 290, 120));
-
-        revenueTxt.setEnabled(false);
-        add(revenueTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, 120, 30));
-
-        jLabel2.setText("Revenue of the market :");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 160, 30));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 590, 120));
 
         searchBtn.setText("Search");
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -119,9 +114,61 @@ public class ProductSalesRevenueJPanel extends javax.swing.JPanel {
         });
         add(searchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 130, 40));
 
+        btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
+
         jLabel3.setText("Market Name");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 124, 110, 40));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        String marketName = (String)marketNameBox.getSelectedItem();
+        ArrayList<OrderList> listOfOrders = business.getMasterOrderCatalog().getOrderList();
+        ArrayList<Product> prodList = new ArrayList();
+        Map<String,Double> map= new HashMap();
+        double price;
+        for(String p:salesPerson){
+            price = 0;
+            for(OrderList ol:listOfOrders){
+            for(Order o:ol.getOrderList()){
+                if(o.getMarket().getMarketName().equals(marketName) && o.getSalesPerson().getSalesPersonName().equals(p)){
+                    prodList.add(o.getProduct());
+                    price = price +(o.getQuantity()*o.getSalesPrice());
+                }
+               }
+            }
+            map.put(p,price);
+        }
+        Stream<Map.Entry<String,Double>> sorted =map.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));
+        Set<Entry<String, Double>> set = map.entrySet();
+        List<Entry<String, Double>> list = new ArrayList<Entry<String, Double>>(set);
+        Collections.sort( list, new Comparator<Map.Entry<String, Double>>()
+        {
+            public int compare( Map.Entry<String, Double> o1, Map.Entry<String, Double> o2 )
+            {
+                return (o2.getValue()).compareTo( o1.getValue() );
+            }
+        } );
+        DefaultTableModel model = (DefaultTableModel) prodJTable.getModel();
+        model.setRowCount(0);
+        int sizeOfMap;
+        if(list.size()<10){
+            sizeOfMap = list.size();
+        }else{
+            sizeOfMap  = 10;
+        }
+        for(int i=0;i<sizeOfMap;i++){
+            Object row[] = new Object[2];
+            row[0] = list.get(i).getKey();
+            row[1] = list.get(i).getValue();
+            model.addRow(row);
+        }
+    }//GEN-LAST:event_searchBtnActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         userProcessContainer.remove(this);
@@ -129,39 +176,14 @@ public class ProductSalesRevenueJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        String marketName = (String)marketNameBox.getSelectedItem();
-        ArrayList<OrderList> listOfOrders = business.getMasterOrderCatalog().getOrderList();
-        ArrayList<Product> prodList = new ArrayList();
-        double price = 0;
-        for(OrderList ol:listOfOrders){
-            for(Order o:ol.getOrderList()){
-                if(o.getMarket().getMarketName().equals(marketName)){
-                    prodList.add(o.getProduct());
-                    price = price +(o.getQuantity()*o.getSalesPrice());
-                }
-            }
-        }
-        revenueTxt.setText(String.valueOf(price));
-        DefaultTableModel model = (DefaultTableModel) prodJTable.getModel();
-        model.setRowCount(0);
-        for (Product p : prodList) {
-            Object row[] = new Object[1];
-            row[0] = p;
-            model.addRow(row);
-        }
-    }//GEN-LAST:event_searchBtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox marketNameBox;
     private javax.swing.JTable prodJTable;
-    private javax.swing.JTextField revenueTxt;
     private javax.swing.JButton searchBtn;
     // End of variables declaration//GEN-END:variables
 }

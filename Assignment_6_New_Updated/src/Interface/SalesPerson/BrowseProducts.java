@@ -575,6 +575,7 @@ public class BrowseProducts extends javax.swing.JPanel {
         int row = orderTable.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Pls select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
         }
         Order oi = (Order) orderTable.getValueAt(row, 0);
         int oldAvail = oi.getProduct().getAvail();
