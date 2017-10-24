@@ -6,7 +6,14 @@
 package Interface.AdminLogin;
 
 import Business.Business;
+import Business.Order;
+import Business.OrderList;
+import Business.Product;
+import Business.Supplier;
+import Interface.AdminLogin.Revenue.ProductSalesRevenueJPanel;
+import Interface.AdminLogin.Revenue.TotalRevenueJPanel;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -89,9 +96,15 @@ public class ManageRevenueJPanel extends javax.swing.JPanel {
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         if(revenueComboBox.getSelectedItem()=="Revenue totals for Xerox"){
-            //totalRevenue();
+            TotalRevenueJPanel panel = new TotalRevenueJPanel(userProcessContainer,business);
+            userProcessContainer.add("TotalRevenueJPanel", panel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
         }else if(revenueComboBox.getSelectedItem()=="Product sales revenues by market"){
-                
+            ProductSalesRevenueJPanel panel = new ProductSalesRevenueJPanel(userProcessContainer,business);
+            userProcessContainer.add("ProductSalesRevenueJPanel", panel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
         }else if(revenueComboBox.getSelectedItem()=="Top 10 sales persons by revenues broken down by market"){
                 
         }else if(revenueComboBox.getSelectedItem()=="Sales persons with consist above target sales"){
@@ -104,8 +117,7 @@ public class ManageRevenueJPanel extends javax.swing.JPanel {
                 
         }
     }//GEN-LAST:event_searchBtnActionPerformed
-    
-    
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

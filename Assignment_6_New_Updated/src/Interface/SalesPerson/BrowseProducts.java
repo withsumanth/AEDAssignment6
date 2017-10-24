@@ -430,6 +430,7 @@ public class BrowseProducts extends javax.swing.JPanel {
             layout.previous(userProcessContainer);
         }else{
             JOptionPane.showMessageDialog(null, "Please Checkout/Remove items selected in the card", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_btnBackActionPerformed
 
@@ -463,6 +464,10 @@ public class BrowseProducts extends javax.swing.JPanel {
         }
 
         double price = getPriceFromOffer(selectedProduct.getPrice());
+        if(price==0.0000000){
+            JOptionPane.showMessageDialog(null, "Please request admin to give offers for products", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         if (fetchQty <= selectedProduct.getAvail()) {
             boolean alreadyPresent = false;
             for (Order oi : orderList.getOrderList()) {
@@ -487,20 +492,25 @@ public class BrowseProducts extends javax.swing.JPanel {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Quantity is greater than the listed Qty", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
         }
 
     }//GEN-LAST:event_addtoCartButton6ActionPerformed
 
     private double getPriceFromOffer(int price) {
         MarketOffer offer = (MarketOffer) offerCombBox.getSelectedItem();
-        if (offer.getOfferPrice().equals("Floor")) {
-            return price * 0.5;
-        } else if (offer.getOfferPrice().equals("Ceil")) {
-            return price * 1.5;
-        } else if (offer.getOfferPrice().equals("Target Price")) {
-            return price * 1.2;
-        } else if (offer.getOfferPrice().equals("Actual Price")) {
-            return price;
+        if(offer!=null){
+            if (offer.getOfferPrice().equals("Floor")) {
+                return price * 0.5;
+            } else if (offer.getOfferPrice().equals("Ceil")) {
+                return price * 1.5;
+            } else if (offer.getOfferPrice().equals("Target Price")) {
+                return price * 1.2;
+            } else if (offer.getOfferPrice().equals("Actual Price")) {
+                return price;
+            }
+        }else{
+            return 0.0000000;
         }
         return 0;
     }
@@ -517,6 +527,7 @@ public class BrowseProducts extends javax.swing.JPanel {
         int row = orderTable.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Pls select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
         }
         Order oi = (Order) orderTable.getValueAt(row, 0);
         ViewOrderItemDetailJPanel voijp = new ViewOrderItemDetailJPanel(userProcessContainer, oi);
