@@ -67,6 +67,11 @@ public class ManageRevenueJPanel extends javax.swing.JPanel {
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 94, 120, 50));
 
         searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
         add(searchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 100, 40));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -79,8 +84,12 @@ public class ManageRevenueJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void revenueComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_revenueComboBoxItemStateChanged
+        
+    }//GEN-LAST:event_revenueComboBoxItemStateChanged
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         if(revenueComboBox.getSelectedItem()=="Revenue totals for Xerox"){
-            
+            //totalRevenue();
         }else if(revenueComboBox.getSelectedItem()=="Product sales revenues by market"){
                 
         }else if(revenueComboBox.getSelectedItem()=="Top 10 sales persons by revenues broken down by market"){
@@ -94,8 +103,9 @@ public class ManageRevenueJPanel extends javax.swing.JPanel {
         }else if(revenueComboBox.getSelectedItem()=="Gap between target and actual"){
                 
         }
-    }//GEN-LAST:event_revenueComboBoxItemStateChanged
-
+    }//GEN-LAST:event_searchBtnActionPerformed
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
