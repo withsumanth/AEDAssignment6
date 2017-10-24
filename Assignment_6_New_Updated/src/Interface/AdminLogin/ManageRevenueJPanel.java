@@ -37,7 +37,7 @@ public class ManageRevenueJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        revenueComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         searchBtn = new javax.swing.JButton();
 
@@ -55,8 +55,13 @@ public class ManageRevenueJPanel extends javax.swing.JPanel {
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Revenue totals for Xerox", "Product sales revenues by market", "Top 10 sales persons by revenues broken down by market", "Sales persons with consist above target sales", "Sales person with below total order target sales", "Top 3 products consistently sold above market target price", "Gap between target and actual" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 500, 50));
+        revenueComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Revenue totals for Xerox", "Product sales revenues by market", "Top 10 sales persons by revenues broken down by market", "Sales persons with consist above target sales", "Sales person with below total order target sales", "Top 3 products consistently sold above market target price", "Gap between target and actual" }));
+        revenueComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                revenueComboBoxItemStateChanged(evt);
+            }
+        });
+        add(revenueComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 500, 50));
 
         jLabel2.setText("Select Option");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 94, 120, 50));
@@ -73,12 +78,30 @@ public class ManageRevenueJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void revenueComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_revenueComboBoxItemStateChanged
+        if(revenueComboBox.getSelectedItem()=="Revenue totals for Xerox"){
+            
+        }else if(revenueComboBox.getSelectedItem()=="Product sales revenues by market"){
+                
+        }else if(revenueComboBox.getSelectedItem()=="Top 10 sales persons by revenues broken down by market"){
+                
+        }else if(revenueComboBox.getSelectedItem()=="Sales persons with consist above target sales"){
+                
+        }else if(revenueComboBox.getSelectedItem()=="Sales person with below total order target sales"){
+                
+        }else if(revenueComboBox.getSelectedItem()=="Top 3 products consistently sold above market target price"){
+                
+        }else if(revenueComboBox.getSelectedItem()=="Gap between target and actual"){
+                
+        }
+    }//GEN-LAST:event_revenueComboBoxItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox<String> revenueComboBox;
     private javax.swing.JButton searchBtn;
     // End of variables declaration//GEN-END:variables
 }
