@@ -10,5 +10,24 @@ package Business;
  * @author JAI JINENDRA
  */
 public class MarketOffer {
-    
+
+    private String offerName;
+    private String offerPrice;
+
+    public String getOfferName() {
+        return offerName;
+    }
+
+    public void setOfferName(String offerName) {
+        this.offerName = offerName;
+    }
+
+    public String getOfferPrice() {
+        return offerPrice;
+    }
+
+    public void setOfferPrice(String offerPrice) {
+        this.offerPrice = offerPrice;
+    }
+
 }
