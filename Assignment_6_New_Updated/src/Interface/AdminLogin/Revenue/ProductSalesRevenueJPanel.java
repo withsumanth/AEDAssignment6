@@ -68,6 +68,12 @@ public class ProductSalesRevenueJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         searchBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        targPriceTxt = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        actPriceTxt = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        gapPriceTxt = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -83,7 +89,7 @@ public class ProductSalesRevenueJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, -1, -1));
 
         prodJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,6 +127,39 @@ public class ProductSalesRevenueJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Market Name");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 124, 110, 40));
+
+        targPriceTxt.setEnabled(false);
+        targPriceTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                targPriceTxtActionPerformed(evt);
+            }
+        });
+        add(targPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 140, 40));
+
+        jLabel4.setText("Target Price");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 100, 40));
+
+        actPriceTxt.setEnabled(false);
+        actPriceTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actPriceTxtActionPerformed(evt);
+            }
+        });
+        add(actPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 140, 40));
+
+        jLabel5.setText("Actual Price");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 430, 100, 40));
+
+        gapPriceTxt.setEnabled(false);
+        gapPriceTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gapPriceTxtActionPerformed(evt);
+            }
+        });
+        add(gapPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, 140, 40));
+
+        jLabel6.setText("Gap Price");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 530, 100, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -134,15 +173,23 @@ public class ProductSalesRevenueJPanel extends javax.swing.JPanel {
         ArrayList<OrderList> listOfOrders = business.getMasterOrderCatalog().getOrderList();
         ArrayList<Product> prodList = new ArrayList();
         double price = 0;
+        double actualPrice=0;
+        double targetPrice=0;
         for(OrderList ol:listOfOrders){
             for(Order o:ol.getOrderList()){
                 if(o.getMarket().getMarketName().equals(marketName)){
                     prodList.add(o.getProduct());
                     price = price +(o.getQuantity()*o.getSalesPrice());
+                    actualPrice = actualPrice + ((o.getProduct().getPrice()) * o.getQuantity());
+                    targetPrice = targetPrice + ((o.getProduct().getPrice()*1.2) * o.getQuantity());
                 }
             }
         }
         revenueTxt.setText(String.valueOf(price));
+        double gapPrice = targetPrice - actualPrice;
+        actPriceTxt.setText(String.valueOf(actualPrice));
+        targPriceTxt.setText(String.valueOf(targetPrice));
+        gapPriceTxt.setText(String.valueOf(gapPrice));
         DefaultTableModel model = (DefaultTableModel) prodJTable.getModel();
         model.setRowCount(0);
         for (Product p : prodList) {
@@ -152,16 +199,34 @@ public class ProductSalesRevenueJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_searchBtnActionPerformed
 
+    private void targPriceTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_targPriceTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_targPriceTxtActionPerformed
+
+    private void actPriceTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actPriceTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_actPriceTxtActionPerformed
+
+    private void gapPriceTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gapPriceTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gapPriceTxtActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField actPriceTxt;
     private javax.swing.JButton btnBack;
+    private javax.swing.JTextField gapPriceTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox marketNameBox;
     private javax.swing.JTable prodJTable;
     private javax.swing.JTextField revenueTxt;
     private javax.swing.JButton searchBtn;
+    private javax.swing.JTextField targPriceTxt;
     // End of variables declaration//GEN-END:variables
 }
