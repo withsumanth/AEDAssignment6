@@ -486,7 +486,7 @@ public class BrowseProducts extends javax.swing.JPanel {
                 int oldAvailability = selectedProduct.getAvail();
                 int newAvailability = oldAvailability - fetchQty;
                 selectedProduct.setAvail(newAvailability);
-                orderList.addOrderItem(selectedProduct, fetchQty, price, salesPerson, customer, market);
+                orderList.addOrderItem(selectedProduct, fetchQty, price, salesPerson, customer, market, (MarketOffer) offerCombBox.getSelectedItem());
                 populateTable();
                 refreshOrderTable();
             }

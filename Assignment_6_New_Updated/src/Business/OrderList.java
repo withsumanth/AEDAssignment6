@@ -16,10 +16,6 @@ public class OrderList {
     private ArrayList<Order> orderList;
     private int orderNumber;
     private static int count = 0;
-    private Product product;
-    private SalesPerson salesPerson;
-    private Customer customer;
-    private Market market;
 
     public OrderList() {
         orderList = new ArrayList<Order>();
@@ -44,7 +40,7 @@ public class OrderList {
         this.orderNumber = orderNumber;
     }
 
-    public Order addOrderItem(Product product, int quantity, double salesPrice,SalesPerson salesPerson,Customer customer,Market market) {
+    public Order addOrderItem(Product product, int quantity, double salesPrice,SalesPerson salesPerson,Customer customer,Market market,MarketOffer offer) {
 
         Order orderItem = new Order();
         orderItem.setProduct(product);
@@ -53,6 +49,7 @@ public class OrderList {
         orderItem.setMarket(market);
         orderItem.setSalesPerson(salesPerson);
         orderItem.setCustomer(customer);
+        orderItem.setOffer(offer);
         orderList.add(orderItem);
         return orderItem;
     }

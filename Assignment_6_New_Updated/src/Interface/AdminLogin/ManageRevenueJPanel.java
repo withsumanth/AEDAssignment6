@@ -11,7 +11,9 @@ import Business.OrderList;
 import Business.Product;
 import Business.Supplier;
 import Interface.AdminLogin.Revenue.ProductSalesRevenueJPanel;
+import Interface.AdminLogin.Revenue.SalesPersonAboveBelowTargJpanel;
 import Interface.AdminLogin.Revenue.TopTenSalesPerJPanel;
+import Interface.AdminLogin.Revenue.TopThreeSalesJpanel;
 import Interface.AdminLogin.Revenue.TotalRevenueJPanel;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -63,7 +65,7 @@ public class ManageRevenueJPanel extends javax.swing.JPanel {
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
 
-        revenueComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Revenue totals for Xerox", "Product sales revenues by market", "Top 10 sales persons by revenues broken down by market", "Sales persons with consist above target sales", "Sales person with below total order target sales", "Top 3 products consistently sold above market target price", "Gap between target and actual" }));
+        revenueComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Revenue totals for Xerox", "Product sales revenues by market", "Top 10 sales persons by revenues broken down by market", "Sales persons with consist above/below target sales", "Top 3 products consistently sold above market target price", "Gap between target and actual" }));
         revenueComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 revenueComboBoxItemStateChanged(evt);
@@ -111,12 +113,16 @@ public class ManageRevenueJPanel extends javax.swing.JPanel {
             userProcessContainer.add("TopTenSalesPerJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);   
-        }else if(revenueComboBox.getSelectedItem()=="Sales persons with consist above target sales"){
-                
-        }else if(revenueComboBox.getSelectedItem()=="Sales person with below total order target sales"){
-                
+        }else if(revenueComboBox.getSelectedItem()=="Sales persons with consist above/below target sales"){
+            SalesPersonAboveBelowTargJpanel panel = new SalesPersonAboveBelowTargJpanel(userProcessContainer,business);
+            userProcessContainer.add("SalesPersonAboveBelowTargJpanel", panel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);   
         }else if(revenueComboBox.getSelectedItem()=="Top 3 products consistently sold above market target price"){
-                
+             TopThreeSalesJpanel panel = new TopThreeSalesJpanel(userProcessContainer,business);
+            userProcessContainer.add("TopThreeSalesJpanel", panel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);      
         }else if(revenueComboBox.getSelectedItem()=="Gap between target and actual"){
                 
         }

@@ -47,14 +47,13 @@
     <Component class="javax.swing.JComboBox" name="revenueComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
+          <StringArray count="6">
             <StringItem index="0" value="Revenue totals for Xerox"/>
             <StringItem index="1" value="Product sales revenues by market"/>
             <StringItem index="2" value="Top 10 sales persons by revenues broken down by market"/>
-            <StringItem index="3" value="Sales persons with consist above target sales"/>
-            <StringItem index="4" value="Sales person with below total order target sales"/>
-            <StringItem index="5" value="Top 3 products consistently sold above market target price"/>
-            <StringItem index="6" value="Gap between target and actual"/>
+            <StringItem index="3" value="Sales persons with consist above/below target sales"/>
+            <StringItem index="4" value="Top 3 products consistently sold above market target price"/>
+            <StringItem index="5" value="Gap between target and actual"/>
           </StringArray>
         </Property>
       </Properties>

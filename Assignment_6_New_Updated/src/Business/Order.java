@@ -17,6 +17,15 @@ public class Order {
     private SalesPerson salesPerson;
     private Customer customer;
     private Market market;
+    private MarketOffer offer;
+
+    public MarketOffer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(MarketOffer offer) {
+        this.offer = offer;
+    }
 
     public SalesPerson getSalesPerson() {
         return salesPerson;
